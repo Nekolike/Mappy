@@ -20,6 +20,7 @@ This is more a list of things that aren't working / implemented yet. Check out f
 
 Mappy can't:
 - Dynamically add / remove categories & keywords. Once you've set up your environment, it's done and can't be changed unless you reload the script
+- Save multiple categories of the same name
 - Show & Hide keywords. They will always be visible in the Mappy-Window for now
 - Save your complete state. This is probably the biggest minus for now. Once you close the script, all configuration will be lost. So you basically have to set up your Mappy every day. (I really hope this can get implemented easily so I can add this as fast as possible since this is probably the biggest disappointment for now)
 
