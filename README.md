@@ -6,7 +6,7 @@ Mappy is an ahk (autohotkey) script to manage your maps and/or inventory. It was
 
 # Demo Video
 
-I will record a "tutorial" in the upcoming days, explaining how to navigate and use the tool, especially in its unfinished state. If you want to use it already, check out the "How to use Mappy" section or the video on reddit here: 
+I will record a "tutorial" in the upcoming days, explaining how to navigate and use the tool, especially in its unfinished state. If you want to use it already, check out the "How to use Mappy" section or the video on reddit here: https://www.reddit.com/r/pathofexile/comments/elgh4d/mappy_has_arrived_new_stash_manager_overlay/
 
 # What can Mappy do?
 
