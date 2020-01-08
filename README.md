@@ -65,3 +65,12 @@ Step 9: Your Mappy is set up and you can start using it. Check out the "What can
 (Optional) Step 10: Done with searching for items? Hide Mappy with Ctrl+Numpad0
 
 (Optional) Step 11: Messed anything up or forgot something very important? Click "Reload Script" in the Mappy-Window to load the script from 0 again. You will have to set up your environment again.
+
+# Updates
+
+I will be using this section to inform about any updates on the tool which aren't published yet. 
+
+09.01.2020
+- Saving is on a good way. It's not there yet but I am getting there. Hope to get it out before/on saturday. Categories can already be saved and loaded. Need to add this for the keywords in each category.
+- Added a smaller version of mappy called "mappy_region" which only contains buttons for the regions. Nothing more. Can't be locked but hidden via Ctrl + Numpad0
+- I am also constantly cleaning up this mess of a code. I've published it in a semi hardcoded stage. Don't do that.
