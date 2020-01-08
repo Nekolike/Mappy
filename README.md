@@ -56,7 +56,7 @@ Step 6: You can either choose any name for your search-criteria you want or choo
 
 Step 7: Once you are done with your categories and search-words, close the Config-Window. (It can't be accessed at any point later on, so set up your environment wisely. Will be patched in later versions)
 
-Step 8: Choose a place for your Mappy-Window and lock it with the "Lock Menu"-button. You can unlock and move it anywhere else if your place of choice doesn't please you. 
+Step 8: Choose a place for your Mappy-Window and lock it with the "Lock Menu"-button. (You have to lock it in order for your buttons to work!) You can unlock and move it anywhere else if your place of choice doesn't please you. 
 
 Step 9: Your Mappy is set up and you can start using it. Check out the "What can Mappy do" section to find more additional features.
 
