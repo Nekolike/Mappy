@@ -1,4 +1,4 @@
-﻿#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
+#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 ; #Warn  ; Enable warnings to assist with detecting common errors.
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
@@ -7,9 +7,10 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ;--------------------------------
 ;--------------------------------
 CustomColor := "EEAA99"
+GUINameMappy := "Mappy_Region"
 
-Gui, New, +LastFound +SysMenu +AlwaysOnTop
-Gui, Color, %CustomColor%
+Gui, %GUINameMappy%:New, +LastFound +SysMenu +AlwaysOnTop
+Gui, %GUINameMappy%:Color, %CustomColor%
 WinSet, TransColor, %CustomColor% 150
 
 ; Regions
@@ -23,7 +24,7 @@ Gui, Add, Button, x+5 vRegionButton7 gRegionSelect, Tirn's End
 Gui, Add, Button, x+5 vRegionButton8 gRegionSelect, Valdo's Rest
 
 ; Startup GUI
-Gui, Show, NoActivate AutoSize
+Gui, %GUINameMappy%:Show, NoActivate AutoSize
 
 Return
 
