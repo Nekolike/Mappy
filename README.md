@@ -10,12 +10,14 @@ I will record a "tutorial" in the upcoming days, explaining how to navigate and 
 
 # Updates
 
-I will be using this section to inform about any updates on the tool which aren't published yet. 
+This section only contains information which hasn't been patched into the tool yet. 
 
-09.01.2020
-- Saving is on a good way. It's not there yet but I am getting there. Hope to get it out before/on saturday. Categories can already be saved and loaded. Need to add this for the keywords in each category.
-- Added a smaller version of mappy called "mappy_region" which only contains buttons for the regions. Nothing more. Can't be locked but hidden via Ctrl + Numpad0
-- I am also constantly cleaning up this mess of a code. I've published it in a semi hardcoded stage. Don't do that.
+10.01.2020
+- **Next patch: 12:00 CET (10.10.2020)**
+- Saving is here. It's not perfect but it's at a state I call functional. It will be the "big" thing for todays patch.
+- I will try to implement the feature to hide/show one/all categories before the new update goes live. Will be pushed to next update if not. 
+- Next "big" thing I'll try to get done is Auto-patching (Either via a button or on startup) so you don't have to re-download the repository over and over again.
+- List of QoL features is big, I have atleast enough to work on.
 
 # What can Mappy do?
 
