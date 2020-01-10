@@ -12,7 +12,7 @@ I recorded a showcase/tutorial to guide through the tool. You find check it out 
 
 10.01.2020
 - **Mappy v0.5 is live now**
-- You can find details about the update here: https://www.reddit.com/r/pathofexile/comments/empcki/mappy_v05_saving_has_arrived/
+- You can find details about the update here: [Reddit - Mappy v0.5](https://www.reddit.com/r/pathofexile/comments/empcki/mappy_v05_saving_has_arrived/)
 - Recorded a showcase/tutorial to guide through the tool (Can be found in the "How to use Mappy" section)
 - Changed "What can Mappy do" and "What can Mappy not do (yet)" due to the new update
 - Next priority feature to come: Auto-updating the tool so everyone who will download the new version will always be up to date. This update will be one of the last I'll publicly announce on reddit since I don't want to spam every small update there. I will still write any update status here
