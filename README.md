@@ -4,39 +4,40 @@ Mappy is an ahk (autohotkey) script to manage your maps and/or inventory. It was
 
 ![Image of Mappy](images/Mappy.PNG)
 
-# Demo Video
+# Video showcase
 
-I will record a "tutorial" in the upcoming days, explaining how to navigate and use the tool, especially in its unfinished state. If you want to use it already, check out the "How to use Mappy" section or the video on reddit here: https://www.reddit.com/r/pathofexile/comments/elgh4d/mappy_has_arrived_new_stash_manager_overlay/
+I recorded a showcase/tutorial to guide through the tool. You find check it out here: [Youtube - Mappy](https://www.youtube.com/watch?v=JkStW1uJr7A)
 
 # Updates
-
-This section only contains information which hasn't been patched into the tool yet. 
 
 10.01.2020
 - **Mappy v0.5 is live now**
 - You can find details about the update here: https://www.reddit.com/r/pathofexile/comments/empcki/mappy_v05_saving_has_arrived/
+- Recorded a showcase/tutorial to guide through the tool (Can be found in the "How to use Mappy" section)
+- Changed "What can Mappy do" and "What can Mappy not do (yet)" due to the new update
+- Next priority feature to come: Auto-updating the tool so everyone who will download the new version will always be up to date. This update will be one of the last I'll publicly announce on reddit since I don't want to spam every small update there. I will still write any update status here
+- I wish you all a wonderful weekend
 
 # What can Mappy do?
 
 Mappy can:
-- Show & Hide all 8 region names for you to search in your stash. One click on any region will show all the maps in that region
 - Save up to 5 categories for you to put keywords in
-- "Save" all your most used / favourite keywords (I.e. Any lategame base you would search or influence-items, good maps and whatever you are typing in your stash to search for.
+- Save all your most used / favourite keywords (I.e. Any lategame base you would search or influence-items, good maps and whatever you are typing in your stash to search for. Setting it up once will create a save-file which then gets reloaded everytime you startup the script so you never have to retype these things again
+- Show & Hide keywords. You can either show / hide all keywords in any single category or just show / hide every keyword 
+- Show & Hide all 8 region names for you to search in your stash. One click on any region will show all the maps in that region (If you are at your stash with the currently tab containing maps)
 
 # What can Mappy not do (yet)?
 This is more a list of things that aren't working / implemented yet. Check out future versions of Mappy to see if any of these were added!
 
 Mappy can't:
-- Dynamically add / remove categories & keywords. Once you've set up your environment, it's done and can't be changed unless you reload the script
-- Save multiple categories of the same name
-- Show & Hide keywords. They will always be visible in the Mappy-Window for now
-- Save your complete state. This is probably the biggest minus for now. Once you close the script, all configuration will be lost. So you basically have to set up your Mappy every day. (I really hope this can get implemented easily so I can add this as fast as possible since this is probably the biggest disappointment for now)
+- Dynamically add / remove categories & keywords. Once you've set up your environment, it's done and can't be accessed. You can still set up a new overlay to overwrite the previous one.
+- Auto-update itself to get the newest version from github. This will be my next big feature to work forward to
+- Adding information to regions like influence or watch stones. Might be coming in the next couple of updates but it's not on my high-priority list
+- Creating / saving multiple overlays which can be loaded individually. This is a feature I would love to implement, will see how I can fit in. 
 
 
 # How to use Mappy
-Quick Answer: Check out the reddit post linked above and watch the video to figure out how to use the tool. Play around with it and you will figure out how to use it after a couple of tries.
-
-Long answer: Managing Mappy looks, feels and is just rough at this stage of the tool. So don't use it if you prefer polished tools. But if you are willing to use it, following these steps to setup your own (sowewhat working) inventory manager:
+A video on how to use Mappy can be found in the "Demo Video" section above. I have also written down the needed steps to use and set up your Mappy below:
 
 Step 1: Startup Mappy.ahk - You will see the following window (That will be your main management window)
 ![Image of Mappy at startup](images/Mappy_Startup.PNG)
@@ -44,11 +45,11 @@ Step 1: Startup Mappy.ahk - You will see the following window (That will be your
 Step 2: Click on "Config" to set your environment up - A new window will open which looks like this
 ![Image of Config at startup](images/Config_Startup.PNG)
 
-Step 3: Choose the amount of categories (From 1 to 5) you want to use and save it with the "Save amount"-button (Anything higher or lower will result in errors/not working areas. This will get patched in later versions)
+Step 3: Choose the amount of categories (From 1 to 5) you want to use and save it with the "Save amount"-button (Anything higher will show you a message saying something like "No more than 5!")
 
 (Optional) Step 3.1: Want to add more categories? Click "Add Category" and choose a name (No more than 5 categories!)
 
-Step 4: Your input fields for categories will open below. Choose any name for the category you want.  (I.e. "Good Maps", "Conqueror Items", "Elder/Shaper Items", "Lategame Bases")
+Step 4: Your input fields for categories will open below. Choose any name for the category you want.  (I.e. "Good Maps", "Conqueror Items", "Elder/Shaper Items", "Lategame Bases", Gems for new chars)
 
 ![Image of Category amount](images/Config_ChooseCategory.PNG)
 
@@ -56,9 +57,9 @@ Step 5: If you are done, click "Save Categories" to lock them in. (They can't be
 
 ![Image of Category + Keyword options](images/Mappy_CategoriesChosen.PNG)
 
-Step 6: You can either choose any name for your search-criteria you want or choose a map from the drop-down-list. Inputting the Map name yourself will also work. Any word will work but keep it "searchable" for your map stash, otherwise it will be a useless button. After inputting your word click "Add" to add it to the Mappy-Window. (Very important: Don't choose any word twice. It will mess up the layout in the Mappy-Window)
+Step 6: You can either choose any name for your search-criteria you want or choose a map from the drop-down-list. Inputting the Map name yourself will also work. Any word will work but keep it "searchable" for your map stash, otherwise it will be a useless button. After inputting your word click "Add" to add it to the Mappy-Window.
 
-Step 7: Once you are done with your categories and search-words, close the Config-Window. (It can't be accessed at any point later on, so set up your environment wisely. Will be patched in later versions)
+Step 7: Once you are done with your categories and search-words, close the Config-Window or press "Save Keywords" to save your overlay. The "Mappy"-Window will shortly reload.
 
 Step 8: Choose a place for your Mappy-Window and lock it with the "Lock Menu"-button. (You have to lock it in order for your buttons to work!) You can unlock and move it anywhere else if your place of choice doesn't please you. 
 
@@ -68,4 +69,3 @@ Step 9: Your Mappy is set up and you can start using it. Check out the "What can
 
 (Optional) Step 10: Done with searching for items? Hide Mappy with Ctrl+Numpad0
 
-(Optional) Step 11: Messed anything up or forgot something very important? Click "Reload Script" in the Mappy-Window to load the script from 0 again. You will have to set up your environment again.
