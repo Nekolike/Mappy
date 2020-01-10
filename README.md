@@ -13,11 +13,8 @@ I will record a "tutorial" in the upcoming days, explaining how to navigate and 
 This section only contains information which hasn't been patched into the tool yet. 
 
 10.01.2020
-- **Next patch: 12:00 CET (10.10.2020)**
-- Saving is here. It's not perfect but it's at a state I call functional. It will be the "big" thing for todays patch.
-- I will try to implement the feature to hide/show one/all categories before the new update goes live. Will be pushed to next update if not. 
-- Next "big" thing I'll try to get done is Auto-patching (Either via a button or on startup) so you don't have to re-download the repository over and over again.
-- List of QoL features is big, I have atleast enough to work on.
+- **Mappy v0.5 is live now**
+- You can find details about the update here: https://www.reddit.com/r/pathofexile/comments/empcki/mappy_v05_saving_has_arrived/
 
 # What can Mappy do?
 
