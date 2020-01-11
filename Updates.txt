@@ -1,0 +1,4 @@
+Update 11.01.2020 - Version 0.5.1
+
+Added:
+- Auto-updating => The script will now check if a newer version is available online and ask the user if he wants to download it
