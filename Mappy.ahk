@@ -1,9 +1,33 @@
-#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
-; #Warn  ; Enable warnings to assist with detecting common errors.
-SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
-SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
+#NoEnv
+SendMode Input
+SetWorkingDir %A_ScriptDir%
+#SingleInstance force
 
 ; If you need some kind words, scroll to the bottom. 
+
+MappyFile := "Mappy.ahk"
+CurrentVerionFile := "CurrentVersion.txt"
+UpdatesFile := "Updates.txt"
+VersionStart := 19
+CurrentVersion = 0.6
+VersionLength = 3
+
+UrlDownloadToFile, https://raw.githubusercontent.com/Nekolike/Mappy/master/%CurrentVerionFile%, %A_ScriptDir%\%CurrentVerionFile%
+FileRead, NewVersion, %A_ScriptDir%\%CurrentVerionFile%
+
+NewVersion := SubStr(NewVersion, VersionStart, VersionLength)
+
+if(CurrentVersion < NewVersion){
+    MsgBox, 4, Update available, New version available! Want to update now?
+    IfMsgBox Yes
+    {
+        UrlDownloadToFile, https://raw.githubusercontent.com/Nekolike/Mappy/master/%UpdatesFile%, %A_ScriptDir%\%UpdatesFile%
+        FileRead, UpdatesContent, %A_ScriptDir%\%UpdatesFile%
+        MsgBox, 4096, Patch notes, %UpdatesContent%
+        UrlDownloadToFile, https://raw.githubusercontent.com/Nekolike/Mappy/master/%MappyFile%, %A_ScriptDir%\%MappyFile%
+        Reload
+    }     
+}
 
 CustomColor := "EEAA99" 
 GUINameMappy := "Mappy"
@@ -28,6 +52,7 @@ Keywords := [[],[]]
 controlName := ""
 KeywordArrayIndex = 0
 KeywordIndex = 0
+tempRegion := 1
 
 ConfigFile = %A_ScriptDir%\Config.ini
 ifnotexist,%ConfigFile%
@@ -59,7 +84,7 @@ Maps := ["Acid Caverns", "Alleyways", "Ancient City", "Arachnid Nest", "Arcade",
 Regions := ["Glennach Cairns", "Haewark Hamlet", "Lex Ejoris", "Lex Proxima", "Lira Arthain", "New Vastir", "Tirn's End", "Valdo's Rest"]
 RegionButtons := ["RegionButton1", "RegionButton2", "RegionButton3", "RegionButton4", "RegionButton5", "RegionButton6", "RegionButton7", "RegionButton8"]
 
-Gui, %GUINameMappy%:New, +LastFound -SysMenu +AlwaysOnTop
+Gui, %GUINameMappy%:New, +LastFound -SysMenu +AlwaysOnTop, %GUINameMappy% - Version %CurrentVersion%
 Gui, %GUINameMappy%:Color, %CustomColor%
 WinSet, TransColor, %CustomColor% 150
 
@@ -69,14 +94,12 @@ Gui, Add, Button, x+5 gShowMaps, Show Keywords
 Gui, Add, Button, x+5 gToggleRegion, Show Region
 Gui, Add, Button, x+5 vButtonConfig gConfig, Create Keywords
 
-Gui, Add, Button, hidden x10 vRegionButton1 gSearchKeyword, Glennach Cairns
-Gui, Add, Button, hidden x+5 vRegionButton2 gSearchKeyword, Haewark Hamlet
-Gui, Add, Button, hidden x+5 vRegionButton3 gSearchKeyword, Lex Ejoris
-Gui, Add, Button, hidden x+5 vRegionButton4 gSearchKeyword, Lex Proxima
-Gui, Add, Button, hidden x+5 vRegionButton5 gSearchKeyword, Lira Arthain
-Gui, Add, Button, hidden x+5 vRegionButton6 gSearchKeyword, New Vastir
-Gui, Add, Button, hidden x+5 vRegionButton7 gSearchKeyword, Tirn's End
-Gui, Add, Button, hidden x+5 vRegionButton8 gSearchKeyword, Valdo's Rest
+Gui, Add, Button, hidden x10 vRegionButton%tempRegion% gSearchKeyword, Glennach Cairns
+Loop % AmountOfRegions - 1
+{
+    tempRegion += 1
+    Gui, Add, Button, hidden x+5 vRegionButton%tempRegion% gSearchKeyword, % Regions[tempRegion]
+}
 
 if(SavedAmountOfCategories != 0){
     CategoryCount := 0
@@ -178,7 +201,7 @@ Gui, %GUINameMappy%:Show, AutoSize
 Return
 
 Config:
-Gui, %GUINameConfig%: new, +AlwaysOnTop
+Gui, %GUINameConfig%: new, +AlwaysOnTop, Create Keywords
 Gui, %GUINameConfig%:Add, Text, x10 y10, Amount of categories:
 Gui, %GUINameConfig%:Add, Edit, vEditAmountOfCategories
 Gui, %GUINameConfig%:Add, UpDown, Range1-5, 3
