@@ -1,6 +1,6 @@
 # Mappy
 
-Mappy is an ahk (autohotkey) script to manage your maps and/or inventory. It was made with the intend to only search for maps in your stash but after playing around for a while I noticed it also works as a search tool for (almost) everything. (I.e. looking for Bone Helmet or ilvl84 items or Conqueror items etc.)
+Mappy is an ahk (autohotkey) script to ease your inventory searches. It was made with the intend to only search for maps in your stash but after playing around for a while I noticed it also works as a search tool for (almost) everything. (I.e. looking for Bone Helmet or ilvl84 items or Conqueror items etc.)
 
 ![Image of Mappy](images/Mappy.PNG)
 
@@ -9,6 +9,10 @@ Mappy is an ahk (autohotkey) script to manage your maps and/or inventory. It was
 I recorded a showcase/tutorial to guide through the tool. You find check it out here: [Youtube - Mappy](https://www.youtube.com/watch?v=JkStW1uJr7A)
 
 # Updates
+
+11.01.2020
+- **Mappy v0.6 is live now**
+- The update is small but has a lot of value: Auto-updating => The script will now check if a newer version is available online and ask the user if he wants to download it. You won't have to redownload the project in order to get the newest version now. Mappy will do that for you.
 
 10.01.2020
 - **Mappy v0.5 is live now**
@@ -25,13 +29,13 @@ Mappy can:
 - Save all your most used / favourite keywords (I.e. Any lategame base you would search or influence-items, good maps and whatever you are typing in your stash to search for. Setting it up once will create a save-file which then gets reloaded everytime you startup the script so you never have to retype these things again
 - Show & Hide keywords. You can either show / hide all keywords in any single category or just show / hide every keyword 
 - Show & Hide all 8 region names for you to search in your stash. One click on any region will show all the maps in that region (If you are at your stash with the currently tab containing maps)
+- Auto-update itself to get the newest version from github (you will be asked if you want to do that)
 
 # What can Mappy not do (yet)?
 This is more a list of things that aren't working / implemented yet. Check out future versions of Mappy to see if any of these were added!
 
 Mappy can't:
 - Dynamically add / remove categories & keywords. Once you've set up your environment, it's done and can't be accessed. You can still set up a new overlay to overwrite the previous one.
-- Auto-update itself to get the newest version from github. This will be my next big feature to work forward to
 - Adding information to regions like influence or watch stones. Might be coming in the next couple of updates but it's not on my high-priority list
 - Creating / saving multiple overlays which can be loaded individually. This is a feature I would love to implement, will see how I can fit in. 
 
