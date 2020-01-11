@@ -1,5 +1,7 @@
 # Mappy
 
+Download here: [Mappy](https://github.com/Nekolike/Mappy/releases)
+
 Mappy is an ahk (autohotkey) script to ease your inventory searches. It was made with the intend to only search for maps in your stash but after playing around for a while I noticed it also works as a search tool for (almost) everything. (I.e. looking for Bone Helmet or ilvl84 items or Conqueror items etc.)
 
 ![Image of Mappy](images/Mappy.PNG)
