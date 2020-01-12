@@ -1,6 +1,6 @@
 # Mappy
 
-Download here (Choose "Source Code (zip)"): [Mappy](https://github.com/Nekolike/Mappy/releases/tag/v0.7-alpha)
+Download here (Choose "Source Code (zip)"): [Mappy](https://github.com/Nekolike/Mappy/releases/tag/v0.7.1-alpha)
 
 Mappy is an ahk (autohotkey) script to ease your inventory searches. It was made with the intend to only search for maps in your stash but after playing around for a while I noticed it also works as a search tool for (almost) everything. (I.e. looking for Bone Helmet or ilvl84 items or Conqueror items etc.)
 
@@ -12,8 +12,11 @@ I recorded a showcase/tutorial to guide through the tool. You find check it out 
 
 # Updates
 12.01.2020
-- **Mappy v0.7 is live now**
-- The update is small again and was named 0.6.1 but I messed up and had to rename it to 0.7. I added the option to change the overlay-toggle-key to whatever you want! Check out the new "Change Toggle-Key"-button!
+- **Mappy v0.7 + 0.7.1 is live now**
+- The update is small again and was named 0.6.1 but I messed up and had to rename it to 0.7 (Also added a quick update 0.7.1 for bug-reasons). I added the option to change the overlay-toggle-key to whatever you want! Check out the new "Change Toggle-Key"-button!
+- Edit-fields which have no value will now be grayed out to reduce confusion
+Bugfix:
+- Fixed a bug which would result in ERROR-buttons when canceling the create-process
 
 11.01.2020
 - **Mappy v0.6 is live now**
