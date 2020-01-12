@@ -1,7 +1,11 @@
-Update 12.01.2020 - Version 0.7.0 (Renamed from 0.6.1 for bug-reasons)
+Update 12.01.2020 - Version 0.7.0 + 0.7.1
 
 Added:
 - Customizable Hotkey => You can now change the hotkey to show / hide the overlay. Press the new button "Change Toggle-Key" -> press any key (or key-combination) and hit "Save new hotkey". You can now toggle the overlay via your new hotkey
+Improved: 
+- Edit-fields which have no value will now be grayed out to reduce confusion
+Bugfix:
+- Fixed a bug which would result in ERROR-buttons when canceling the create-process
 
 Update 11.01.2020 - Version 0.6
 
