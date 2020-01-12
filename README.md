@@ -11,6 +11,7 @@ Mappy is an ahk (autohotkey) script to ease your inventory searches. It was made
 I recorded a showcase/tutorial to guide through the tool. You find check it out here: [Youtube - Mappy](https://www.youtube.com/watch?v=JkStW1uJr7A)
 
 # Updates
+12.01.2020
 - **Mappy v0.7 is live now**
 - The update is small again and was named 0.6.1 but I messed up and had to rename it to 0.7. I added the option to change the overlay-toggle-key to whatever you want! Check out the new "Change Toggle-Key"-button!
 
