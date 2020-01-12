@@ -9,8 +9,8 @@ MappyFile := "Mappy.ahk"
 CurrentVerionFile := "CurrentVersion.txt"
 UpdatesFile := "Updates.txt"
 VersionStart := 19
-CurrentVersion = 0.6
-VersionLength = 3
+CurrentVersion = 0.6.1
+VersionLength = 4
 
 UrlDownloadToFile, https://raw.githubusercontent.com/Nekolike/Mappy/master/%CurrentVerionFile%, %A_ScriptDir%\%CurrentVerionFile%
 FileRead, NewVersion, %A_ScriptDir%\%CurrentVerionFile%
@@ -32,6 +32,7 @@ if(CurrentVersion < NewVersion){
 CustomColor := "EEAA99" 
 GUINameMappy := "Mappy"
 GUINameConfig := "Config"
+GUINameOverlayHotkey := "OverlayHotkey"
 IsLocked := false
 GUIMappyOpen := true
 GUIConfigOpen := false
@@ -58,7 +59,20 @@ ConfigFile = %A_ScriptDir%\Config.ini
 ifnotexist,%ConfigFile%
 {
     IniWrite, 0, %ConfigFile%, AmountOfCategories, Key1
+    IniWrite, ^Numpad0, %ConfigFile%, ToggleOverlayHotkey, Key1
 }
+
+IniRead, ToggleOverlayHotkey, %ConfigFile%, ToggleOverlayHotkey, Key1
+; Adds toggle key to config.ini once for everyone who didn't load it from github first time
+if(ToggleOverlayHotkey = "ERROR"){
+    IniWrite, ^Numpad0, %ConfigFile%, ToggleOverlayHotkey, Key1
+    IniRead, ToggleOverlayHotkey, %ConfigFile%, ToggleOverlayHotkey, Key1
+}
+else{
+    IniRead, ToggleOverlayHotkey, %ConfigFile%, ToggleOverlayHotkey, Key1
+}
+
+Hotkey, %ToggleOverlayHotkey%, ToggleOverlay, On
 IniRead, SavedAmountOfCategories, %ConfigFile%, AmountOfCategories, Key1
 
 Loop % SavedAmountOfCategories
@@ -93,6 +107,7 @@ Gui, Add, Button, x+5 gHideMaps, Hide Keywords
 Gui, Add, Button, x+5 gShowMaps, Show Keywords
 Gui, Add, Button, x+5 gToggleRegion, Show Region
 Gui, Add, Button, x+5 vButtonConfig gConfig, Create Keywords
+Gui, Add, Button, x+5 vButtonHotkey gConfigHotkey, Change Toggle-Key
 
 Gui, Add, Button, hidden x10 vRegionButton%tempRegion% gSearchKeyword, Glennach Cairns
 Loop % AmountOfRegions - 1
@@ -215,6 +230,14 @@ Keywords2 = 0
 Keywords3 = 0
 Keywords4 = 0
 Keywords5 = 0
+Return
+
+ConfigHotkey:
+Gui, %GUINameOverlayHotkey%: new, +AlwaysOnTop, Change Hotkey
+Gui, %GUINameOverlayHotkey%:Add, Text, x10 y10, New Overlay-Hotkey:
+Gui, %GUINameOverlayHotkey%:Add, Hotkey, w150 h20 vguihotkeyToggleOverlay , %ToggleOverlayHotkey%
+Gui, %GUINameOverlayHotkey%:Add, Button, x+5 vButtonSaveToggleOverlayHotkey gSaveToggleOverlayHotkey, Save new hotkey
+Gui, %GUINameOverlayHotkey%:Show
 Return
 
 SaveAmount:
@@ -445,9 +468,18 @@ Return
 
 ConfigGuiClose:
 Reload
-return
+Return
+
+SaveToggleOverlayHotkey:
+Gui, Submit, NoHide
+IniWrite, %guihotkeyToggleOverlay% , %ConfigFile%, ToggleOverlayHotkey, Key1
+Hotkey, %ToggleOverlayHotkey%, ToggleOverlay, Off
+ToggleOverlayHotkey = %guihotkeyToggleOverlay%
+Hotkey, %ToggleOverlayHotkey%, ToggleOverlay, On
+Gui, Destroy
+Return
     
-^Numpad0::
+ToggleOverlay:
 if (GUIMappyOpen)
     Gui, %GUINameMappy%:Hide
 else
