@@ -9,7 +9,7 @@ MappyFile := "Mappy.ahk"
 CurrentVerionFile := "CurrentVersion.txt"
 UpdatesFile := "Updates.txt"
 VersionStart := 19
-CurrentVersion = 0.71
+CurrentVersion = 0.72
 VersionLength = 4
 
 UrlDownloadToFile, https://raw.githubusercontent.com/Nekolike/Mappy/master/%CurrentVerionFile%, %A_ScriptDir%\%CurrentVerionFile%
@@ -63,7 +63,6 @@ ifnotexist,%ConfigFile%
 }
 
 IniRead, ToggleOverlayHotkey, %ConfigFile%, ToggleOverlayHotkey, Key1
-; Adds toggle key to config.ini once for everyone who didn't load it from github first time
 if(ToggleOverlayHotkey = "ERROR"){
     IniWrite, ^Numpad0, %ConfigFile%, ToggleOverlayHotkey, Key1
     IniRead, ToggleOverlayHotkey, %ConfigFile%, ToggleOverlayHotkey, Key1
@@ -192,6 +191,7 @@ Loop % SavedAmountOfCategories
                 GuiControl, %GUINameMappy%:Show, ButtonSavedCategory%CategoryCount%Keyword%tempKey%            
         }
 }
+Gui, %GUINameMappy%:Show, AutoSize
 Return
 
 ToggleRegion:
@@ -219,17 +219,18 @@ Config:
 Gui, %GUINameConfig%: new, +AlwaysOnTop, Create Keywords
 Gui, %GUINameConfig%:Add, Text, x10 y10, Amount of categories:
 Gui, %GUINameConfig%:Add, Edit, vEditAmountOfCategories
-Gui, %GUINameConfig%:Add, UpDown, Range1-5, 3
+Gui, %GUINameConfig%:Add, UpDown,, 1
 Gui, %GUINameConfig%:Add, Button, x+5 vButtonSaveAmount gSaveAmount, Save amount
 Gui, %GUINameConfig%:Add, Button, Disabled x+5 vButtonAddCategory gAddCategory, Add Category
 Gui, %GUINameConfig%:Add, Button, Disabled x+5 vButtonSaveCategories gSaveCategories, Save Categories
 Gui, %GUINameConfig%:Show
 
-Keywords1 = 0
-Keywords2 = 0
-Keywords3 = 0
-Keywords4 = 0
-Keywords5 = 0
+CategoryCount := 0
+Loop % SavedAmountOfCategories
+{
+    CategoryCount += 1
+    Keywords%CategoryCount% := 0
+}
 Return
 
 ConfigHotkey:
@@ -242,11 +243,6 @@ Return
 
 SaveAmount:
 GuiControlGet, AmountOfCategories,, EditAmountOfCategories
-if(AmountOfCategories > 5)
-{
-    MsgBox, 4096, Too Many Categories!,  I can only add up to 5 categories
-    Return
-}
 
 DDLString := "Academy|"
 Loop, % Maps.MaxIndex()
@@ -272,12 +268,6 @@ Return
 
 AddCategory:
 AmountOfCategories += 1
-if(AmountOfCategories > 5)
-{
-    MsgBox, 4096, Too Many Categories!,  I can only add up to 5 categories
-    AmountOfCategories -= 1
-    Return
-}
 CategoryCount += 1
 MapCount += 1
 Gui, %GUINameConfig%:Add, Text, x10, Category:
@@ -369,7 +359,7 @@ GuiControl, Disable, ButtonAddCategory
 GuiControl, Disable, ButtonSaveCategories
 Gui, %GUINameConfig%:Add, Button, x10 vButtonSaveKeywords gSaveKeywords, Save Keywords
 Gui, %GUINameConfig%:Show, AutoSize
-Gui, %GUINameMappy%:Show, AutoSize
+Gui, %GUINameMappy%:Show, AutoSize NoActivate
 Return
 
 SaveKeywords:
@@ -379,32 +369,9 @@ Return
 AddKeyword:
 Gui, Submit, NoHide
 
-
-if(controlName = "ButtonAddKeyword1"){
-    CategoryCount = 1
-    Keywords1 += 1
-    KeyValue = %Keywords1%
-}
-else if(controlName = "ButtonAddKeyword2"){
-    CategoryCount = 2
-    Keywords2 += 1
-    KeyValue = %Keywords2%
-}
-else if(controlName = "ButtonAddKeyword3"){
-    CategoryCount = 3
-    Keywords3 += 1
-    KeyValue = %Keywords3%
-}
-else if(controlName = "ButtonAddKeyword4"){
-    CategoryCount = 4
-    Keywords4 += 1
-    KeyValue = %Keywords4%
-} 
-else if(controlName = "ButtonAddKeyword5"){
-    CategoryCount = 5
-    Keywords5 += 1
-    KeyValue = %Keywords5%
-}
+CategoryCount := RegExReplace(controlName, "\D")
+Keywords%CategoryCount% += 1
+KeyValue = % Keywords%CategoryCount%
 
 if(!MapsAddedCategory%CategoryCount%){
     tempKey = % Keywords%CategoryCount%
@@ -427,33 +394,20 @@ GuiControlGet, ComboValue,, % Combo%CategoryCount%
 IniWrite, %ComboValue%, %ConfigFile%, Category%CategoryCount%, Key%KeyValue%
 IniWrite, %KeyValue%, %ConfigFile%, AmountOfKeywordsCategory%CategoryCount%, Key1
 Gui, %GUINameMappy%:Add, Button, x%NextButtonX% y%NextButtonY% vButtonCategory%CategoryCount%Keyword%tempKey% gSearchKeyword, % Combo%CategoryCount%
-Gui, %GUINameMappy%:Show, AutoSize
+Gui, %GUINameMappy%:Show, AutoSize NoActivate
 Return
 
 SearchKeyword:
-GuiControlGet, var,, % A_GuiControl
-WinActivate, Path of Exile
-Send ^f
-Send % var
+if WinExist("Path of Exile"){
+    GuiControlGet, var,, % A_GuiControl
+    WinActivate, Path of Exile
+    Send ^f
+    Send % var
+}
 Return
 
 ShowHideKeywords:
-if(controlName = "ButtonCategory1"){
-    CategoryCount = 1
-}
-else if(controlName = "ButtonCategory2"){
-    CategoryCount = 2
-}
-else if(controlName = "ButtonCategory3"){
-    CategoryCount = 3
-}
-else if(controlName = "ButtonCategory4"){
-    CategoryCount = 4
-} 
-else if(controlName = "ButtonCategory5"){
-    CategoryCount = 5
-}
-
+CategoryCount := RegExReplace(controlName, "\D")
 tempKey = 0
 Loop % SavedAmountOfKeywords[CategoryCount]
     {
@@ -469,6 +423,7 @@ Loop % SavedAmountOfKeywords[CategoryCount]
         
     }
 KeywordsHidden%CategoryCount% := !KeywordsHidden%CategoryCount%
+Gui, %GUINameMappy%:Show, AutoSize
 Return
 
 ConfigGuiClose:
