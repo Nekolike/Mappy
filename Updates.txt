@@ -1,3 +1,15 @@
+Update 13.01.2020 - Version 0.7.2
+
+Added:
+- You can add as many categories as you like with as many keywords as you like! But keep the visual cluster in mind.
+
+Improved:
+- Clicking on a keyword now checks if Path of Exile is open and only sends the keyword if it is. Won't do anything otherwise.
+- Saving your categories won't highlight the overlay-window anymore to prevent confusion. Same with adding keywords.
+
+Bugfix:
+- Fixed a bug where not all keywords were displayed under certain circumstances. 
+
 Update 12.01.2020 - Version 0.7.0 + 0.7.1
 
 Added:
