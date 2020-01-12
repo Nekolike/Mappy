@@ -1,3 +1,8 @@
+Update 12.01.2020 - Version 0.6.1
+
+Added:
+- Customizable Hotkey => You can now change the hotkey to show / hide the overlay. Press the new button "Change Toggle-Key" -> press any key (or key-combination) and hit "Save new hotkey". You can now toggle the overlay via your new hotkey
+
 Update 11.01.2020 - Version 0.6
 
 Added:
