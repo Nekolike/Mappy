@@ -9,7 +9,7 @@ MappyFile := "Mappy.ahk"
 CurrentVerionFile := "CurrentVersion.txt"
 UpdatesFile := "Updates.txt"
 VersionStart := 19
-CurrentVersion = 0.70
+CurrentVersion = 0.71
 VersionLength = 4
 
 UrlDownloadToFile, https://raw.githubusercontent.com/Nekolike/Mappy/master/%CurrentVerionFile%, %A_ScriptDir%\%CurrentVerionFile%
@@ -265,7 +265,7 @@ Loop %AmountOfCategories%{
 
 Gui, %GUINameConfig%:Show, AutoSize
 GuiControl, Disable, ButtonSaveAmount
-GuiControl, Disable, AmountOfCategories
+GuiControl, Disable, EditAmountOfCategories
 GuiControl, Enable, ButtonAddCategory
 GuiControl, Enable, ButtonSaveCategories
 Return
@@ -280,7 +280,6 @@ if(AmountOfCategories > 5)
 }
 CategoryCount += 1
 MapCount += 1
-IniWrite, %AmountOfCategories%, %A_ScriptDir%\Config.ini, AmountOfCategories, Key1
 Gui, %GUINameConfig%:Add, Text, x10, Category:
 Gui, %GUINameConfig%:Add, Edit, vCategory%CategoryCount%
 Gui, %GUINameConfig%:Add, ComboBox, hidden x+5 vCombo%CategoryCount%, %DDLString%
@@ -357,6 +356,12 @@ Loop % SavedAmountOfCategories
         GuiControl, %GUINameMappy%:Hide, ButtonCategory%CategoryCount%Keyword%tempKey%
         GuiControl, %GUINameMappy%:Hide, ButtonSavedCategory%CategoryCount%Keyword%tempKey%
     }
+}
+
+CategoryCount := 0
+Loop %AmountOfCategories%{
+    CategoryCount += 1
+    GuiControl, Disable, Category%CategoryCount%
 }
 
 IniWrite, %AmountOfCategories%, %A_ScriptDir%\Config.ini, AmountOfCategories, Key1
