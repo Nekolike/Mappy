@@ -9,7 +9,7 @@ MappyFile := "Mappy.ahk"
 CurrentVerionFile := "CurrentVersion.txt"
 UpdatesFile := "Updates.txt"
 VersionStart := 19
-CurrentVersion = 0.61
+CurrentVersion = 0.70
 VersionLength = 4
 
 UrlDownloadToFile, https://raw.githubusercontent.com/Nekolike/Mappy/master/%CurrentVerionFile%, %A_ScriptDir%\%CurrentVerionFile%
