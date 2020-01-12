@@ -1,6 +1,6 @@
 # Mappy
 
-Download here (Choose "Source Code (zip)"): [Mappy](https://github.com/Nekolike/Mappy/releases/tag/v0.7.1-alpha)
+Download here (Choose "Source Code (zip)"): [Mappy](https://github.com/Nekolike/Mappy/releases/tag/v0.7.2-alpha)
 
 Mappy is an ahk (autohotkey) script to ease your inventory searches. It was made with the intend to only search for maps in your stash but after playing around for a while I noticed it also works as a search tool for (almost) everything. (I.e. looking for Bone Helmet or ilvl84 items or Conqueror items etc.)
 
@@ -11,6 +11,11 @@ Mappy is an ahk (autohotkey) script to ease your inventory searches. It was made
 I recorded a showcase/tutorial to guide through the tool. You find check it out here: [Youtube - Mappy](https://www.youtube.com/watch?v=JkStW1uJr7A)
 
 # Updates
+
+Update 13.01.2020 - Version 0.7.2
+- **Mappy v0.7.2 is live now**
+- I am happy to announce that there is no limit to categories anymore. I removed all the hardcoded stuff and improved the UX a little bit. Check out the Updates.txt for more details
+
 12.01.2020
 - **Mappy v0.7 + 0.7.1 is live now**
 - The update is small again and was named 0.6.1 but I messed up and had to rename it to 0.7 (Also added a quick update 0.7.1 for bug-reasons). I added the option to change the overlay-toggle-key to whatever you want! Check out the new "Change Toggle-Key"-button!
@@ -33,7 +38,7 @@ Bugfix:
 # What can Mappy do?
 
 Mappy can:
-- Save up to 5 categories for you to put keywords in
+- Save categories for you to put keywords in
 - Save all your most used / favourite keywords (I.e. Any lategame base you would search or influence-items, good maps and whatever you are typing in your stash to search for. Setting it up once will create a save-file which then gets reloaded everytime you startup the script so you never have to retype these things again
 - Show & Hide keywords. You can either show / hide all keywords in any single category or just show / hide every keyword 
 - Show & Hide all 8 region names for you to search in your stash. One click on any region will show all the maps in that region (If you are at your stash with the currently tab containing maps)
