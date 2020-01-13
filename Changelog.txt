@@ -1,6 +1,7 @@
 Update 13.01.2020 - Version 0.7.5
 
 - You can now add categories & keywords on the fly. Check out the new "+"-buttons on your overlay. No need to set up your whole overlay again just because you forgot one keyword/category!
+- Renamed "Create Keywords" to "New Overlay"
 
 Update 13.01.2020 - Version 0.7.2
 
