@@ -1,0 +1,20 @@
+Update 13.01.2020 - Version 0.7.5
+
+- You can now add categories & keywords on the fly. Check out the new "+"-buttons on your overlay. No need to set up your whole overlay again just because you forgot one keyword/category!
+
+Update 13.01.2020 - Version 0.7.2
+
+- You can add as many categories as you like with as many keywords as you like! But keep the visual cluster in mind.
+- Clicking on a keyword now checks if Path of Exile is open and only sends the keyword if it is. Won't do anything otherwise.
+- Saving your categories won't highlight the overlay-window anymore to prevent confusion. Same with adding keywords.
+- Fixed a bug where not all keywords were displayed under certain circumstances. 
+
+Update 12.01.2020 - Version 0.7.0 + 0.7.1
+
+- Customizable Hotkey => You can now change the hotkey to show / hide the overlay. Press the new button "Change Toggle-Key" -> press any key (or key-combination) and hit "Save new hotkey". You can now toggle the overlay via your new hotkey
+- Edit-fields which have no value will now be grayed out to reduce confusion
+- Fixed a bug which would result in ERROR-buttons when canceling the create-process
+
+Update 11.01.2020 - Version 0.6
+
+- Auto-updating => The script will now check if a newer version is available online and ask the user if he wants to download it
