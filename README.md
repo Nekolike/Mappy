@@ -2,7 +2,7 @@
 
 Download here (Choose "Source Code (zip)"): [Mappy](https://github.com/Nekolike/Mappy/releases/tag/v0.7.2-alpha)
 
-Mappy is an ahk (autohotkey) script to ease your inventory searches. It was made with the intend to only search for maps in your stash but after playing around for a while I noticed it also works as a search tool for (almost) everything. (I.e. looking for Bone Helmet or ilvl84 items or Conqueror items etc.)
+Mappy is an ahk (autohotkey) script to ease your inventory searches. It was made with the intend to only search for maps in your stash but after playing around for a while I noticed it also works as a search tool for other keywords. (I.e. looking for Bone Helmet or ilvl84 items or Conqueror items etc.)
 
 ![Image of Mappy](images/Mappy.PNG)
 
@@ -62,9 +62,9 @@ Step 1: Startup Mappy.ahk - You will see the following window (That will be your
 Step 2: Click on "Config" to set your environment up - A new window will open which looks like this
 ![Image of Config at startup](images/Config_Startup.PNG)
 
-Step 3: Choose the amount of categories (From 1 to 5) you want to use and save it with the "Save amount"-button (Anything higher will show you a message saying something like "No more than 5!")
+Step 3: Choose the amount of categories you want to use and save it with the "Save amount"-button
 
-(Optional) Step 3.1: Want to add more categories? Click "Add Category" and choose a name (No more than 5 categories!)
+(Optional) Step 3.1: Want to add more categories? Click "Add Category" and choose a name
 
 Step 4: Your input fields for categories will open below. Choose any name for the category you want.  (I.e. "Good Maps", "Conqueror Items", "Elder/Shaper Items", "Lategame Bases", Gems for new chars)
 
@@ -84,5 +84,5 @@ Step 9: Your Mappy is set up and you can start using it. Check out the "What can
 
 ![Image of Mappy done](images/Mappy_Final.PNG)
 
-(Optional) Step 10: Done with searching for items? Hide Mappy with Ctrl+Numpad0
+(Optional) Step 10: Done with searching for items? Hide Mappy with Ctrl+Numpad0 (Or change the hotkey via the "Change Toggle-Key" option!
 
