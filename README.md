@@ -12,28 +12,12 @@ I recorded a showcase/tutorial to guide through the tool. You find check it out 
 
 # Updates
 
-Update 13.01.2020 - Version 0.7.2
-- **Mappy v0.7.2 is live now**
-- I am happy to announce that there is no limit to categories anymore. I removed all the hardcoded stuff and improved the UX a little bit. Check out the Updates.txt for more details
+Check the Changelog.txt for a full list of updates. This place only contains informations about the current progress I'd like to share
 
-12.01.2020
-- **Mappy v0.7 + 0.7.1 is live now**
-- The update is small again and was named 0.6.1 but I messed up and had to rename it to 0.7 (Also added a quick update 0.7.1 for bug-reasons). I added the option to change the overlay-toggle-key to whatever you want! Check out the new "Change Toggle-Key"-button!
-- Edit-fields which have no value will now be grayed out to reduce confusion
-Bugfix:
-- Fixed a bug which would result in ERROR-buttons when canceling the create-process
+**Update 14.01.2020 **
 
-11.01.2020
-- **Mappy v0.6 is live now**
-- The update is small but has a lot of value: Auto-updating => The script will now check if a newer version is available online and ask the user if he wants to download it. You won't have to redownload the project in order to get the newest version now. Mappy will do that for you.
+Mappy is getting better each day. It's still not the final version but I am getting there. I will put out v0.8 tomorrow which includes saving & loading multiple overlays. This will open up some possibilities like sharing or creating different overlays for different purposes. I am looking forward to the 1.0 release and the reaction from reddit. Hope everyone is having a good start into the week :)
 
-10.01.2020
-- **Mappy v0.5 is live now**
-- You can find details about the update here: [Reddit - Mappy v0.5](https://www.reddit.com/r/pathofexile/comments/empcki/mappy_v05_saving_has_arrived/)
-- Recorded a showcase/tutorial to guide through the tool (Can be found in the "How to use Mappy" section)
-- Changed "What can Mappy do" and "What can Mappy not do (yet)" due to the new update
-- Next priority feature to come: Auto-updating the tool so everyone who will download the new version will always be up to date. This update will be one of the last I'll publicly announce on reddit since I don't want to spam every small update there. I will still write any update status here
-- I wish you all a wonderful weekend
 
 # What can Mappy do?
 
