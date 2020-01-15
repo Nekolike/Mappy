@@ -14,9 +14,9 @@ I recorded a showcase/tutorial to guide through the tool. You find check it out 
 
 Check the Changelog.txt for a full list of updates. This place only contains informations about the current progress I'd like to share
 
-**Update 14.01.2020 **
+**Update 15.01.2020**
 
-Mappy is getting better each day. It's still not the final version but I am getting there. I will put out v0.8 tomorrow which includes saving & loading multiple overlays. This will open up some possibilities like sharing or creating different overlays for different purposes. I am looking forward to the 1.0 release and the reaction from reddit. Hope everyone is having a good start into the week :)
+Couldn't get v0.8 out today because saving/loading seemed to work but it wasn't. I got it to work now but had no time to update. Mappy seems to be in a fairly v1.0-ish state, will have to think about it. Hope everyone is having a good start into the week :)
 
 
 # What can Mappy do?
