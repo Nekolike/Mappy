@@ -14,9 +14,9 @@ I recorded a showcase/tutorial to guide through the tool. You find check it out 
 
 Check the Changelog.txt for a full list of updates. This place only contains informations about the current progress I'd like to share
 
-**Update 15.01.2020**
+**Update 16.01.2020**
 
-Couldn't get v0.8 out today because saving/loading seemed to work but it wasn't. I got it to work now but had no time to update. Mappy seems to be in a fairly v1.0-ish state, will have to think about it. Hope everyone is having a good start into the week :)
+v0.8 won't come. I could put it out but I will put all my effort now into the v1.0 release. The way data is stored is currently getting completely reworked in order to get dynamic deleting of keywords & categories done. Saving & loading had to be redone. But I am really looking forward to v1.0 because it shapes more and more into my initial vision of the tool. Hope everyone is having a good start into the week :)
 
 
 # What can Mappy do?
