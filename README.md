@@ -14,9 +14,9 @@ I recorded a showcase/tutorial to guide through the tool. You find check it out 
 
 Check the Changelog.txt for a full list of updates. This place only contains informations about the current progress I'd like to share
 
-**Update 16.01.2020**
+**Update 17.01.2020**
 
-v0.8 won't come. I could put it out but I will put all my effort now into the v1.0 release. The way data is stored is currently getting completely reworked in order to get dynamic deleting of keywords & categories done. Saving & loading had to be redone. But I am really looking forward to v1.0 because it shapes more and more into my initial vision of the tool. Hope everyone is having a good start into the week :)
+Mappy is mean to me :( Dynamic removing might not make it into the tool atm. I tried different approaches and ideas but coding Mappy "step-by-step" from the beginning holds it really back right now. I've rewritten things so many times now and still am nowhere close to having that feature implemented. Will see how I feel tomorrow. Hope everyone is having a good start into the week :)
 
 
 # What can Mappy do?
