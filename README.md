@@ -41,7 +41,24 @@ This is more a list of things that aren't working / implemented yet. Check out f
 
 I will update this section with pictures in upcoming days. Sorry for the inconvenience.
 
-The first time you start Mappy, a fairly empty window with the title "Mappy - Version 1.00 - Config.ini" will open. You can either create your overlay via the "+" buttons at the bottom or the "New Overlay"-button. Choosing the later will open a config-window where you can select how many categories you want to add, their names and their keywords. You can either save your overlay in the "Config.ini" or create a new save file via the "Save As New Overlay"-button. (The filename must end with ".ini"!) Adding categories & keywords dynamically works with the "+" buttons. The one at the end of your categories (bottom one) will add a new category. There's also a "+" button at the end of each category to add a new keyword for that category. If you want to remove any category or keyword, right click on it. Keywords will be removed immediately, categories will open a message box to know if you really want to delete the category with all the keywords in them. Once you've set up your overlay, a press on any keyword will send the text to Path of Exile (Have your stash open in order for the button to be used as a search-word-button). A press on any category will show/hide all keywords in that category. You can also load another overlay via the "Load Overlay"-button. Done with Mappy? Minimize the window via Ctrl+Numpad0 or change the hotkey to whatever you want with the "Change Toggle-Key"-button.
+Using the overlay is fairly simple. Starting Mappy for the first time will pop up a window with one line of buttons and a "+" button below. (I will call this process Method 1)
+- Clicking that + button will add a new category. Categories are like folders, they contain all your keywords. 
+- Keywords are the words you'd type in your input field in Path of Exile. 
+- Having your first category added allows you to add keywords to that category (Via a "+" button again. The one on the right to your category). With your first category & keyword done, Mappy can go to work. 
+- Clicking on your keyword will send the text to Path of Exile (Your stash or vendor menu needs to be open). 
+- Repeat this process of adding categories & keywords until you have everything set up. You can now use Mappy everyday instead of typing anything in your stash anymore!
+- If you don't need a category or keyword anymore, either hit the "-" button to remove the last item or right-click on a button to remove it
+
+Method 2 (Creating a new overlay via the config-gui. Allows for saving the overlay as a new file)
+- Click on "New Overlay" to open a new window which guides you through the process of adding categories & keywords
+- Choose the amount of categories you want and same it
+- Name your categories and hit "Save Categories"
+- You can now add keywords to your categories (The field contains a drop-down-list with all maps if these are what you'd like to add)
+- Done with your categories & keywords? You can either choose "Save Overlay" to overwrite your current one or choose "Save As New Overlay" to create a new file (filename must end with ".ini")
+
+Loading Overlays
+- You can also load overlays (either from yourself or other people if they share their .ini.
+- Simply select "Load Overlay" and select the file you'd like to load. Done
 
 
 # How to use Mappy (Outdated < Version 1.0)
