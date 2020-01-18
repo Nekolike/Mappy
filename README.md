@@ -1,43 +1,50 @@
 # Mappy
 
-Download here (Choose "Source Code (zip)"): [Mappy](https://github.com/Nekolike/Mappy/releases/tag/v0.7.2-alpha)
+Download here: [Mappy](https://github.com/Nekolike/Mappy/releases/tag/v1.0)
 
-Mappy is an ahk (autohotkey) script to ease your inventory searches. It was made with the intend to only search for maps in your stash but after playing around for a while I noticed it also works as a search tool for other keywords. (I.e. looking for Bone Helmet or ilvl84 items or Conqueror items etc.)
+Mappy is an ahk (autohotkey) script to ease your inventory searches. It allows you to save all the things you search for in your stash or at vendors every day. It simply replaces typing with clicking on buttons.
 
 ![Image of Mappy](images/Mappy.PNG)
 
 # Video showcase
 
-I recorded a showcase/tutorial to guide through the tool. You find check it out here: [Youtube - Mappy](https://www.youtube.com/watch?v=JkStW1uJr7A)
+I recorded a showcase/tutorial to guide through the tool. The version of Mappy in this video is <1.0, so it's missing some features. A new video will be uploaded in the next days. You can check the video out here: [Youtube - Mappy](https://www.youtube.com/watch?v=JkStW1uJr7A)
 
 # Updates
 
 Check the Changelog.txt for a full list of updates. This place only contains informations about the current progress I'd like to share
 
-**Update 17.01.2020**
+**Update 20.01.2020**
 
-Mappy is mean to me :( Dynamic removing might not make it into the tool atm. I tried different approaches and ideas but coding Mappy "step-by-step" from the beginning holds it really back right now. I've rewritten things so many times now and still am nowhere close to having that feature implemented. Will see how I feel tomorrow. Hope everyone is having a good start into the week :)
+Version 1.0 is out. Removing is here, saving & loading is here. I am happy with the result and hope people can find use in the tool. Hope everyone is having a wonderful weekend :)
 
 
 # What can Mappy do?
 
 Mappy can:
-- Save categories for you to put keywords in
-- Save all your most used / favourite keywords (I.e. Any lategame base you would search or influence-items, good maps and whatever you are typing in your stash to search for. Setting it up once will create a save-file which then gets reloaded everytime you startup the script so you never have to retype these things again
-- Show & Hide keywords. You can either show / hide all keywords in any single category or just show / hide every keyword 
+- Save as many categories as you like to put keywords in
+- Save all your most used keywords (I.e. Any lategame base you would search or influence-items, good maps and whatever you are typing in your stash to search for) Setting it up once will create a save-file which then gets reloaded everytime you startup the script so you never have to retype these things again)
+- Remove any category or keyword you like with right-clicking on the button.
+- Remove the last keyword in a category via the "-" button at the end of the category
+- Remove the last category via the "-" button at the end of the categories
+- Show & Hide keywords. You can either show / hide all keywords in any single category or just show / hide every keyword
 - Show & Hide all 8 region names for you to search in your stash. One click on any region will show all the maps in that region (If you are at your stash with the currently tab containing maps)
-- Auto-update itself to get the newest version from github (you will be asked if you want to do that)
+- Save multiple layouts. You can create a new overlay with the "New Overlay" button and save your overlay as a new one at the end via the "Save As New Overlay". The filename needs to end with ".ini"
+- Load any overlay. Click "Load Overlay" and choose a "*.ini" file to load. This works with any .ini that was created via Mappy. Allows for sharing overlays
 
 # What can Mappy not do (yet)?
 This is more a list of things that aren't working / implemented yet. Check out future versions of Mappy to see if any of these were added!
 
-Mappy can't:
-- Dynamically add / remove categories & keywords. Once you've set up your environment, it's done and can't be accessed. You can still set up a new overlay to overwrite the previous one.
 - Adding information to regions like influence or watch stones. Might be coming in the next couple of updates but it's not on my high-priority list
-- Creating / saving multiple overlays which can be loaded individually. This is a feature I would love to implement, will see how I can fit in. 
+
+# How to use Mappy (Version 1.0)
+
+I will update this section with pictures in upcoming days. Sorry for the inconvenience.
+
+The first time you start Mappy, a fairly empty window with the title "Mappy - Version 1.00 - Config.ini" will open. You can either create your overlay via the "+" buttons at the bottom or the "New Overlay"-button. Choosing the later will open a config-window where you can select how many categories you want to add, their names and their keywords. You can either save your overlay in the "Config.ini" or create a new save file via the "Save As New Overlay"-button. (The filename must end with ".ini"!) Adding categories & keywords dynamically works with the "+" buttons. The one at the end of your categories (bottom one) will add a new category. There's also a "+" button at the end of each category to add a new keyword for that category. If you want to remove any category or keyword, right click on it. Keywords will be removed immediately, categories will open a message box to know if you really want to delete the category with all the keywords in them. Once you've set up your overlay, a press on any keyword will send the text to Path of Exile (Have your stash open in order for the button to be used as a search-word-button). A press on any category will show/hide all keywords in that category. You can also load another overlay via the "Load Overlay"-button. Done with Mappy? Minimize the window via Ctrl+Numpad0 or change the hotkey to whatever you want with the "Change Toggle-Key"-button.
 
 
-# How to use Mappy
+# How to use Mappy (Outdated < Version 1.0)
 A video on how to use Mappy can be found in the "Demo Video" section above. I have also written down the needed steps to use and set up your Mappy below:
 
 Step 1: Startup Mappy.ahk - You will see the following window (That will be your main management window)
