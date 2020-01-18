@@ -1,9 +1,8 @@
-Update 13.01.2020 - Version 0.7.5
+
+Update 18.01.2020 - Version 1.0
 
 Added:
 
-- You can now add categories & keywords on the fly. Check out the new "+"-buttons on your overlay. No need to set up your whole overlay again just because you forgot one keyword/category!
-
-Changed:
-
-- Renamed "Create Keywords" to "New Overlay"
+- You can now remove any category / keyword with a right-click on the category / keyword. There's also a new "-" button at the end of each category which removes the last keyword. There's also a new "-" button at the bottom of your categories which removes the last category (With all the keywords in them). 
+- You can now save multiple overlays. Create a new overlay with the "New Overlay" option and hit "Save As New Overlay" at the end to create a new *.ini with your new overlay. 
+- You can now load overlays. Click "Load Overlay" and select one of your *.ini files which you'd like to use.
