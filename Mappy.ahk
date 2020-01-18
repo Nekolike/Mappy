@@ -5,16 +5,18 @@ SetWorkingDir %A_ScriptDir%
 
 ; If you need some kind words, scroll to the bottom. 
 
+OnExit, SaveWindowPosition
 MappyFile := "Mappy.ahk"
-CurrentVerionFile := "CurrentVersion.txt"
+CurrentVersionFile := "CurrentVersion.txt"
 UpdatesFile := "Updates.txt"
 ChangelogFile := "Changelog.txt"
+SettingsFile := "Settings.ini"
 VersionStart := 19
-CurrentVersion = 0.75
+CurrentVersion = 1.00
 VersionLength = 4
 
-UrlDownloadToFile, https://raw.githubusercontent.com/Nekolike/Mappy/master/%CurrentVerionFile%, %A_ScriptDir%\%CurrentVerionFile%
-FileRead, NewVersion, %A_ScriptDir%\%CurrentVerionFile%
+UrlDownloadToFile, https://raw.githubusercontent.com/Nekolike/Mappy/master/%CurrentVersionFile%, %A_ScriptDir%\%CurrentVersionFile%
+FileRead, NewVersion, %A_ScriptDir%\%CurrentVersionFile%
 
 NewVersion := SubStr(NewVersion, VersionStart, VersionLength)
 
@@ -31,21 +33,19 @@ if(CurrentVersion < NewVersion){
     }     
 }
 
-CustomColor := "EEAA99" 
+CustomColor := "EEAA99"
 GUINameMappy := "Mappy"
 GUINameConfig := "Config"
 GUINameOverlayHotkey := "OverlayHotkey"
 GUINameAddKeyword := "AddKeyword"
 GUINameAddCategory := "AddCategory"
+Maps := ["Acid Caverns", "Alleyways", "Ancient City", "Arachnid Nest", "Arcade", "Arena", "Arid Lake", "Armoury", "Arsenal", "Ashen Wood", "Atoll", "Barrows", "Basilica", "Bazaar", "Beach", "Belfry", "Bog", "Bone Crypt", "Burial Chambers", "Cage", "Caldera", "Canyon", "Carcass", "Castle Ruins", "Cells", "Cemetery", "Channel", "Chateau", "City Square", "Colonnade", "Colosseum", "Conservatory", "Coral Ruins", "Core", "Courthouse", "Courtyard", "Coves", "Crater", "Crimson Temple", "Crystal Ore", "Cursed Crypt", "Dark Forest", "Defiled Cathedral", "Desert", "Desert Spring", "Dig", "Dunes", "Dungeon", "Estuary", "Excavation", "Factory", "Fields", "Flooded Mine", "Fungal Hollow", "Gardens", "Geode", "Ghetto", "Glacier", "Graveyard", "Grotto", "Haunted Mansion", "Iceberg", "Infested Valley", "Ivory Temple", "Jungle Valley", "Laboratory", "Lair", "Lava Chamber", "Lava Lake", "Leyline", "Lighthouse", "Lookout", "Malformation", "Marshes", "Mausoleum", "Maze", "Mesa", "Mineral Pools", "Moon Temple", "Mud Geyser", "Museum", "Necropolis", "Orchard", "Overgrown Ruin", "Overgrown Shrine", "Palace", "Park", "Pen", "Peninsula", "Phantasmagoria", "Pier", "Pit", "Plateau", "Plaza", "Port", "Precinct", "Primordial Pool", "Promenade", "Racecourse", "Ramparts", "Reef", "Relic Chambers", "Residence", "Scriptorium", "Sepulchre", "Shipyard", "Shore", "Shrine", "Siege", "Spider Forest", "Spider Lair", "Strand", "Sulphur Vents", "Summit", "Sunken City", "Temple", "Terrace", "Thicket", "Tower", "Toxic Sewer", "Tropical Island", "Underground River", "Underground Sea", "Vaal Pyramid", "Vaal Temple", "Vault", "Villa", "Volcano", "Waste Pool", "Wasteland", "Waterways", "Wharf"]
+Regions := ["Glennach Cairns", "Haewark Hamlet", "Lex Ejoris", "Lex Proxima", "Lira Arthain", "New Vastir", "Tirn's End", "Valdo's Rest"]
+RegionButtons := ["RegionButton1", "RegionButton2", "RegionButton3", "RegionButton4", "RegionButton5", "RegionButton6", "RegionButton7", "RegionButton8"]
 IsLocked := false
 GUIMappyOpen := true
 GUIConfigOpen := false
 RegionOpen := false
-MapsAddedCategory1 := false
-MapsAddedCategory2 := false
-MapsAddedCategory3 := false
-MapsAddedCategory4 := false
-MapsAddedCategory5 := false
 CategoryCount = 0
 MapCount = 0
 AmountOfRegions = 8
@@ -63,21 +63,35 @@ ConfigFile = %A_ScriptDir%\Config.ini
 ifnotexist,%ConfigFile%
 {
     IniWrite, 0, %ConfigFile%, AmountOfCategories, Key1
-    IniWrite, ^Numpad0, %ConfigFile%, ToggleOverlayHotkey, Key1
 }
 
-IniRead, ToggleOverlayHotkey, %ConfigFile%, ToggleOverlayHotkey, Key1
-if(ToggleOverlayHotkey = "ERROR"){
-    IniWrite, ^Numpad0, %ConfigFile%, ToggleOverlayHotkey, Key1
-    IniRead, ToggleOverlayHotkey, %ConfigFile%, ToggleOverlayHotkey, Key1
+ifnotexist,%SettingsFile%
+{
+    IniWrite, %ConfigFile%, %SettingsFile%, Settings, ConfigPath
+    IniWrite, ^Numpad0, %SettingsFile%, Settings, ToggleKey
+    IniWrite, 500, %SettingsFile%, Settings, MappyPositionX
+    IniWrite, 500, %SettingsFile%, Settings, MappyPositionY
+}
+IniRead, ConfigFile, %SettingsFile%, Settings, ConfigPath
+SplitPath, ConfigFile, ConfigFileName
+
+IniRead, ToggleOverlayHotkey, %SettingsFile%, Settings, ToggleKey
+if(ToggleOverlayHotkey = "ERROR" || ToggleOverlayHotkey = ""){
+    IniWrite, ^Numpad0, %SettingsFile%, Settings, ToggleKey
+    IniRead, ToggleOverlayHotkey, %SettingsFile%, Settings, ToggleKey
 }
 else{
-    IniRead, ToggleOverlayHotkey, %ConfigFile%, ToggleOverlayHotkey, Key1
+    IniRead, ToggleOverlayHotkey, %SettingsFile%, Settings, ToggleKey
 }
 
 Hotkey, %ToggleOverlayHotkey%, ToggleOverlay, On
+
 IniRead, SavedAmountOfCategories, %ConfigFile%, AmountOfCategories, Key1
 
+if(SavedAmountOfCategories = "ERROR" || SavedAmountOfCategories = ""){
+    IniWrite, 0, %ConfigFile%, AmountOfCategories, Key1
+    SavedAmountOfCategories = 0
+}
 Loop % SavedAmountOfCategories
 {
     CategoryCount += 1
@@ -97,19 +111,16 @@ Loop % SavedAmountOfCategories
     }
 }
 
-Maps := ["Acid Caverns", "Alleyways", "Ancient City", "Arachnid Nest", "Arcade", "Arena", "Arid Lake", "Armoury", "Arsenal", "Ashen Wood", "Atoll", "Barrows", "Basilica", "Bazaar", "Beach", "Belfry", "Bog", "Bone Crypt", "Burial Chambers", "Cage", "Caldera", "Canyon", "Carcass", "Castle Ruins", "Cells", "Cemetery", "Channel", "Chateau", "City Square", "Colonnade", "Colosseum", "Conservatory", "Coral Ruins", "Core", "Courthouse", "Courtyard", "Coves", "Crater", "Crimson Temple", "Crystal Ore", "Cursed Crypt", "Dark Forest", "Defiled Cathedral", "Desert", "Desert Spring", "Dig", "Dunes", "Dungeon", "Estuary", "Excavation", "Factory", "Fields", "Flooded Mine", "Fungal Hollow", "Gardens", "Geode", "Ghetto", "Glacier", "Graveyard", "Grotto", "Haunted Mansion", "Iceberg", "Infested Valley", "Ivory Temple", "Jungle Valley", "Laboratory", "Lair", "Lava Chamber", "Lava Lake", "Leyline", "Lighthouse", "Lookout", "Malformation", "Marshes", "Mausoleum", "Maze", "Mesa", "Mineral Pools", "Moon Temple", "Mud Geyser", "Museum", "Necropolis", "Orchard", "Overgrown Ruin", "Overgrown Shrine", "Palace", "Park", "Pen", "Peninsula", "Phantasmagoria", "Pier", "Pit", "Plateau", "Plaza", "Port", "Precinct", "Primordial Pool", "Promenade", "Racecourse", "Ramparts", "Reef", "Relic Chambers", "Residence", "Scriptorium", "Sepulchre", "Shipyard", "Shore", "Shrine", "Siege", "Spider Forest", "Spider Lair", "Strand", "Sulphur Vents", "Summit", "Sunken City", "Temple", "Terrace", "Thicket", "Tower", "Toxic Sewer", "Tropical Island", "Underground River", "Underground Sea", "Vaal Pyramid", "Vaal Temple", "Vault", "Villa", "Volcano", "Waste Pool", "Wasteland", "Waterways", "Wharf"]
-Regions := ["Glennach Cairns", "Haewark Hamlet", "Lex Ejoris", "Lex Proxima", "Lira Arthain", "New Vastir", "Tirn's End", "Valdo's Rest"]
-RegionButtons := ["RegionButton1", "RegionButton2", "RegionButton3", "RegionButton4", "RegionButton5", "RegionButton6", "RegionButton7", "RegionButton8"]
-
-Gui, %GUINameMappy%:New, +LastFound -SysMenu +AlwaysOnTop, %GUINameMappy% - Version %CurrentVersion%
+Gui, %GUINameMappy%:New, +LastFound -SysMenu +AlwaysOnTop, %GUINameMappy% - Version %CurrentVersion% - %ConfigFileName%
 Gui, %GUINameMappy%:Color, %CustomColor%
 WinSet, TransColor, %CustomColor% 150
 
 Gui, Add, Button, x10 y10 gLock, Lock Menu
-Gui, Add, Button, x+5 gHideMaps, Hide Keywords
-Gui, Add, Button, x+5 gShowMaps, Show Keywords
+Gui, Add, Button, x+5 gHideKeywords, Hide Keywords
+Gui, Add, Button, x+5 gShowKeywords, Show Keywords
 Gui, Add, Button, x+5 gToggleRegion, Show Region
 Gui, Add, Button, x+5 vButtonConfig gConfig, New Overlay
+Gui, Add, Button, x+5 vButtonLoadConfig gLoadConfig, Load Overlay
 Gui, Add, Button, x+5 vButtonHotkey gConfigHotkey, Change Toggle-Key
 
 Gui, Add, Button, hidden x10 vRegionButton%tempRegion% gSearchKeyword, Glennach Cairns
@@ -129,13 +140,13 @@ if(SavedAmountOfCategories != 0){
         Loop % SavedAmountOfKeywords[A_Index]{
             if(!SavedMapsAddedCategory%CategoryCount%){
                 GuiControlGet, CategoryButton, %GUINameMappy%:Pos, ButtonCategory%CategoryCount%
-                NextButtonX := NewButtonPositionX(CategoryButtonX, CategoryButtonW, 5)
+                NextButtonX := NewButtonPosition(CategoryButtonX, CategoryButtonW, 5)
                 NextButtonY = %CategoryButtonY%
                 SavedMapsAddedCategory%CategoryCount% := !SavedMapsAddedCategory%CategoryCount%
             }
             else{
                 GuiControlGet, Button2, %GUINameMappy%:Pos, ButtonSavedCategory%CategoryCount%Keyword%tempKey%
-                NextButtonX := NewButtonPositionX(Button2X, Button2W, 5)
+                NextButtonX := NewButtonPosition(Button2X, Button2W, 5)
                 NextButtonY = %Button2Y%
                 Keywords%CategoryCount% += 1
                 tempKey = % Keywords%CategoryCount%
@@ -146,11 +157,151 @@ if(SavedAmountOfCategories != 0){
             Gui, %GUINameMappy%:Add, Button, x%NextButtonX% y%NextButtonY% vButtonSavedCategory%CategoryCount%Keyword%tempKey% gSearchKeyword, %currentKeyword%
         }
         Gui, %GUINameMappy%:Add, Button, x+5 vButtonAddDynamicKeyword%CategoryCount% gGetButtonAddKeywordPressed, +
+        Gui, %GUINameMappy%:Add, Button, x+5 vButtonRemoveDynamicKeyword%CategoryCount% gGetButtonRemoveKeywordPressed, - ;ADDEDD
     }
 }
 
 Gui, %GUINameMappy%:Add, Button, x10 vButtonAddDynamicCategoryConfig gAddDynamicCategoryConfig, +
-Gui, %GUINameMappy%:Show, NoActivate AutoSize
+if(SavedAmountOfCategories > 0)
+{
+    Gui, %GUINameMappy%:Add, Button, x+5 vButtonRemoveDynamicCategory gRemoveDynamicCategory, -
+}
+else
+{
+    Gui, %GUINameMappy%:Add, Button, hidden x+5 vButtonRemoveDynamicCategory gRemoveDynamicCategory, -
+}
+IniRead, MappyWindowX, %SettingsFile%, Settings, MappyPositionX
+IniRead, MappyWindowY, %SettingsFile%, Settings, MappyPositionY
+if((MappyWindowX = "" || MappyWindowX = "ERROR") && (MappyWindowY = "" || MappyWindowY = "ERROR"))
+{
+    IniWrite, 500, %SettingsFile%, Settings, MappyPositionX
+    IniWrite, 500, %SettingsFile%, Settings, MappyPositionY
+    MappyWindowX := 500
+    MappyWindowY := 500
+}
+IniRead, IsLocked, %SettingsFile%, Settings, Locked
+Gui, %GUINameMappy%:Show, x%MappyWindowX% y%MappyWindowY% NoActivate AutoSize 
+if(IsLocked = "ERROR" || IsLocked = "false")
+{
+    IsLocked := false
+    Gui, %GUINameMappy%:+Caption
+    GuiControl, Text, Unlock, Lock Menu
+}
+else
+{
+    Gui, %GUINameMappy%:-Caption
+    GuiControl, Text, Lock, Unlock
+}
+Gui, %GUINameMappy%:Show, x%MappyWindowX% y%MappyWindowY% NoActivate AutoSize 
+OnMessage(0x204, "WM_RBUTTONDOWN")
+Return
+
+WM_RBUTTONDOWN() {
+    Gosub DeleteDynamicKeyword
+}
+
+DeleteDynamicKeyword:
+GuiControlGet, var, Name, %A_GuiControl%
+
+AmountOfNumbers := 0
+Pos := 1
+
+While Pos := RegExMatch(var, "(\d+)", Match, Pos + StrLen(Match)) {
+	Variable%A_Index% := Match
+    AmountOfNumbers += 1
+}
+
+tempCategoryCount = %Variable1%
+
+if(AmountOfNumbers = 1)
+{
+    tempCategory := Categories[tempCategoryCount]
+    MsgBox, 4, Delete Category, Do you want to delete the category %tempCategory%
+    IfMsgBox, Yes
+    {
+        Categories.Remove(tempCategoryCount)
+        Keywords.Remove(tempCategoryCount)
+        SavedAmountOfCategories -= 1
+        SavedAmountOfKeywords.Remove(tempCategoryCount)
+        IniWrite, %SavedAmountOfCategories%, %A_ScriptDir%\Shadow%ConfigFileName%, AmountOfCategories, Key1
+        currentRun = 1
+
+        Loop % SavedAmountOfCategories
+        {
+            KeywordIndex = 1
+            currentCategory := % Categories[A_Index]
+            currentAmountOfKeywords := SavedAmountOfKeywords[currentRun]
+            IniWrite, %currentCategory%, %A_ScriptDir%\Shadow%ConfigFileName%, Categories, Key%currentRun%
+            IniWrite, %currentAmountOfKeywords%, %A_ScriptDir%\Shadow%ConfigFileName%, AmountOfKeywordsCategory%currentRun%, Key1
+            
+            Loop % SavedAmountOfKeywords[A_Index]
+            {
+                currentKeyword := Keywords[currentRun, KeywordIndex]
+                IniWrite, %currentKeyword% , %A_ScriptDir%\Shadow%ConfigFileName%, Category%currentRun%, Key%KeywordIndex%
+                KeywordIndex += 1
+            }
+            currentRun += 1
+        }
+        FileDelete, %ConfigFile%
+        FileMove, %A_ScriptDir%\Shadow%ConfigFileName%, %ConfigFile%, 1
+        Reload
+    }
+}
+
+if(AmountOfNumbers = 2)
+{
+    tempKeywordCount = %Variable2%
+    Keywords[tempCategoryCount].Remove(tempKeywordCount)
+    SavedAmountOfKeywords[tempCategoryCount] -= 1
+
+    IniWrite, %SavedAmountOfCategories%, %A_ScriptDir%\Shadow%ConfigFileName%, AmountOfCategories, Key1
+    currentRun = 1
+
+    Loop % SavedAmountOfCategories
+    {
+        KeywordIndex = 1
+        currentCategory := % Categories[A_Index]
+        currentAmountOfKeywords := SavedAmountOfKeywords[currentRun]
+        IniWrite, %currentCategory%, %A_ScriptDir%\Shadow%ConfigFileName%, Categories, Key%currentRun%
+        IniWrite, %currentAmountOfKeywords%, %A_ScriptDir%\Shadow%ConfigFileName%, AmountOfKeywordsCategory%currentRun%, Key1
+        
+        Loop % SavedAmountOfKeywords[A_Index]
+        {
+            currentKeyword := Keywords[currentRun, KeywordIndex]
+            IniWrite, %currentKeyword% , %A_ScriptDir%\Shadow%ConfigFileName%, Category%currentRun%, Key%KeywordIndex%
+            KeywordIndex += 1
+        }
+        currentRun += 1
+    }
+    FileDelete, %ConfigFile%
+    FileMove, %A_ScriptDir%\Shadow%ConfigFileName%, %ConfigFile%, 1
+    Reload
+}
+Return
+
+RemoveDynamicCategory:
+LastCategory = ButtonCategory%SavedAmountOfCategories%
+GuiControlGet, tempCategory,, %LastCategory%
+MsgBox, 4, Remove Category, Do you want to remove the last category (%tempCategory%) ? This will also delete all keywords in that category
+IfMsgBox, Yes
+{
+    IniDelete, %ConfigFile%, Category%SavedAmountOfCategories%
+    IniDelete, %ConfigFile%, AmountOfKeywordsCategory%SavedAmountOfCategories%
+    IniDelete, %ConfigFile%, Categories, Key%SavedAmountOfCategories%
+    SavedAmountOfCategories -= 1
+    IniWrite, %SavedAmountOfCategories%, %ConfigFile%, AmountOfCategories, Key1
+    Reload
+}
+Return
+
+LoadConfig:
+FileSelectFile, loadFile
+if(loadFile = "")
+{
+    Return
+}
+IniWrite, %loadFile%, %SettingsFile%, Settings, ConfigPath
+Reload
 Return
 
 Lock:
@@ -158,34 +309,35 @@ if (!IsLocked)
 {
     Gui, %GUINameMappy%:-Caption
     GuiControl, Text, Lock, Unlock
+    IniWrite, true, %SettingsFile%, Settings, Locked
 }
 else
 {
     Gui, %GUINameMappy%:+Caption
     GuiControl, Text, Unlock, Lock Menu
-    
+    IniWrite, false, %SettingsFile%, Settings, Locked
 }
 IsLocked := !IsLocked
 Gui, %GUINameMappy%:Show, AutoSize
 Return
 
-
-HideMaps:
+HideKeywords:
 CategoryCount = 0
 Loop % SavedAmountOfCategories
 {
     tempKey = 0
     CategoryCount += 1
     Loop % SavedAmountOfKeywords[A_Index]
-        {
-            tempKey += 1
-            GuiControl, %GUINameMappy%:Hide, ButtonSavedCategory%CategoryCount%Keyword%tempKey%   
-        }
-        GuiControl, %GUINameMappy%:Hide, ButtonAddDynamicKeyword%CategoryCount%
+    {
+        tempKey += 1
+        GuiControl, %GUINameMappy%:Hide, ButtonSavedCategory%CategoryCount%Keyword%tempKey%   
+    }
+    GuiControl, %GUINameMappy%:Hide, ButtonAddDynamicKeyword%CategoryCount% 
+    GuiControl, %GUINameMappy%:Hide, ButtonRemoveDynamicKeyword%CategoryCount% 
 }
 Return
 
-ShowMaps:
+ShowKeywords:
 CategoryCount = 0
 Loop % SavedAmountOfCategories
 {
@@ -194,10 +346,11 @@ Loop % SavedAmountOfCategories
     Loop % SavedAmountOfKeywords[A_Index]
         {
             tempKey += 1
-            GuiControl, %GUINameMappy%:Show, ButtonSavedCategory%CategoryCount%Keyword%tempKey%            
-                  
+                GuiControl, %GUINameMappy%:Show, ButtonSavedCategory%CategoryCount%Keyword%tempKey%            
+                
         }
-    GuiControl, %GUINameMappy%:Show, ButtonAddDynamicKeyword%CategoryCount%
+    GuiControl, %GUINameMappy%:Show, ButtonAddDynamicKeyword%CategoryCount%  
+    GuiControl, %GUINameMappy%:Show, ButtonRemoveDynamicKeyword%CategoryCount%  
 }
 Gui, %GUINameMappy%:Show, AutoSize
 Return
@@ -298,7 +451,7 @@ if(AmountOfCategories <= SavedAmountOfCategories)
         GuiControl, Show, Combo%CategoryCount%
         GuiControl, Show, ButtonAddKeyword%MapCount%
         GuiControlGet, CategoryNumber,, Category%CategoryCount%
-        IniWrite, %CategoryNumber%, %ConfigFile%, Categories, Key%CategoryCount%
+        IniWrite, %CategoryNumber%, %A_ScriptDir%\Shadow%ConfigFileName%, Categories, Key%CategoryCount% ;CHANGED
         GuiControl, %GUINameMappy%:Text, ButtonCategory%CategoryCount%, % CategoryNumber
     }
 
@@ -308,7 +461,7 @@ if(AmountOfCategories <= SavedAmountOfCategories)
             {
                 CategoryCount += 1
                 GuiControl, %GUINameMappy%:Hide, ButtonCategory%CategoryCount%, % CategoryNumber
-                IniDelete, %ConfigFile%, Categories, Key%CategoryCount%
+                IniDelete, %A_ScriptDir%\Shadow%ConfigFileName%, Categories, Key%CategoryCount% ;CHANGED
             }
     }
     
@@ -323,7 +476,7 @@ else if(AmountOfCategories > SavedAmountOfCategories)
         GuiControl, Show, Combo%CategoryCount%
         GuiControl, Show, ButtonAddKeyword%MapCount%
         GuiControlGet, CategoryNumber,, Category%CategoryCount%
-        IniWrite, %CategoryNumber%, %ConfigFile%, Categories, Key%CategoryCount%
+        IniWrite, %CategoryNumber%, %A_ScriptDir%\Shadow%ConfigFileName%, Categories, Key%CategoryCount% ;CHANGED
         GuiControl, %GUINameMappy%:Text, ButtonCategory%CategoryCount%, % CategoryNumber
     }
 
@@ -336,7 +489,7 @@ else if(AmountOfCategories > SavedAmountOfCategories)
         GuiControlGet, CategoryNumber,, Category%CategoryCount%
         Categories[CategoryCount] := CategoryNumber
         Gui, %GUINameMappy%:Add, Button, x10 section vButtonCategory%CategoryCount% gGetButtonCategoryPressed, % Categories[CategoryCount]
-        IniWrite, %CategoryNumber%, %ConfigFile%, Categories, Key%CategoryCount%
+        IniWrite, %CategoryNumber%, %A_ScriptDir%\Shadow%ConfigFileName%, Categories, Key%CategoryCount% ;CHANGED
     }
 }
 
@@ -346,9 +499,10 @@ Loop % SavedAmountOfCategories
 {
     CategoryCount += 1
     tempKey = 0
-    IniDelete, %ConfigFile%, Category%CategoryCount%
-    IniDelete, %ConfigFile%, AmountOfKeywordsCategory%CategoryCount%
+    IniDelete, %A_ScriptDir%\Shadow%ConfigFileName%, Category%CategoryCount% ;CHANGED
+    IniDelete, %A_ScriptDir%\Shadow%ConfigFileName%, AmountOfKeywordsCategory%CategoryCount% ;CHANGED
     GuiControl, %GUINameMappy%:Hide, ButtonAddDynamicKeyword%CategoryCount%
+    GuiControl, %GUINameMappy%:Hide, ButtonRemoveDynamicKeyword%CategoryCount%
     Loop % SavedAmountOfKeywords[A_Index]
     {
         tempKey += 1
@@ -357,22 +511,34 @@ Loop % SavedAmountOfCategories
     }
 }
 
-CategoryCount := 0
+CategoryCount = 0
 Loop %AmountOfCategories%{
     CategoryCount += 1
     GuiControl, Disable, Category%CategoryCount%
 }
 
-IniWrite, %AmountOfCategories%, %A_ScriptDir%\Config.ini, AmountOfCategories, Key1
+IniWrite, %AmountOfCategories%, %A_ScriptDir%\Shadow%ConfigFileName%, AmountOfCategories, Key1 ;CHANGED
 GuiControl, Disable, ButtonAddCategory
 GuiControl, Disable, ButtonSaveCategories
 GuiControl, %GUINameMappy%:Hide, ButtonAddDynamicCategoryConfig
-Gui, %GUINameConfig%:Add, Button, x10 vButtonSaveKeywords gSaveKeywords, Save Keywords
+GuiControl, %GUINameMappy%:Hide, ButtonRemoveDynamicCategory
+Gui, %GUINameConfig%:Add, Button, x10 vButtonSaveKeywords gSaveKeywords, Save Overlay
+Gui, %GUINameConfig%:Add, Button, x+5 vButtonSaveNewKeywords gSaveNewKeywords, Save As New Overlay ;ADDEDD
 Gui, %GUINameConfig%:Show, AutoSize
 Gui, %GUINameMappy%:Show, AutoSize NoActivate
 Return
 
+SaveNewKeywords:
+FileSelectFile, newConfigPath, S16
+FileDelete, %newConfigPath%
+IniWrite, %newConfigPath%, %SettingsFile%, Settings, ConfigPath
+FileMove, %A_ScriptDir%\Shadow%ConfigFileName%, %newConfigPath%, 1
+Reload
+Return
+
 SaveKeywords:
+FileDelete, %ConfigFile%
+FileMove, %A_ScriptDir%\Shadow%ConfigFileName%, %ConfigFile%, 1
 Reload
 Return
 
@@ -386,7 +552,7 @@ KeyValue = % Keywords%CategoryCount%
 if(!MapsAddedCategory%CategoryCount%){
     tempKey = % Keywords%CategoryCount%
     GuiControlGet, CategoryButton, %GUINameMappy%:Pos, ButtonCategory%CategoryCount%
-    NextButtonX := NewButtonPositionX(CategoryButtonX, CategoryButtonW, 5)
+    NextButtonX := NewButtonPosition(CategoryButtonX, CategoryButtonW, 5)
     NextButtonY = %CategoryButtonY%
     MapsAddedCategory%CategoryCount% := !MapsAddedCategory%CategoryCount%
 }
@@ -394,15 +560,15 @@ else{
     Keywords%CategoryCount% -= 1
     tempKey = % Keywords%CategoryCount%
     GuiControlGet, Button2, %GUINameMappy%:Pos, ButtonCategory%CategoryCount%Keyword%tempKey%
-    NextButtonX := NewButtonPositionX(Button2X, Button2W, 5)
+    NextButtonX := NewButtonPosition(Button2X, Button2W, 5)
     NextButtonY = %Button2Y%
     Keywords%CategoryCount% += 1
     tempKey = % Keywords%CategoryCount%
 }
 
 GuiControlGet, ComboValue,, % Combo%CategoryCount%
-IniWrite, %ComboValue%, %ConfigFile%, Category%CategoryCount%, Key%KeyValue%
-IniWrite, %KeyValue%, %ConfigFile%, AmountOfKeywordsCategory%CategoryCount%, Key1
+IniWrite, %ComboValue%, %A_ScriptDir%\Shadow%ConfigFileName%, Category%CategoryCount%, Key%KeyValue% ;CHANGED
+IniWrite, %KeyValue%, %A_ScriptDir%\Shadow%ConfigFileName%, AmountOfKeywordsCategory%CategoryCount%, Key1 ;CHANGED
 Gui, %GUINameMappy%:Add, Button, x%NextButtonX% y%NextButtonY% vButtonCategory%CategoryCount%Keyword%tempKey% gSearchKeyword, % Combo%CategoryCount%
 Gui, %GUINameMappy%:Show, AutoSize NoActivate
 Return
@@ -418,6 +584,17 @@ Return
 
 ShowHideKeywords:
 CategoryCount := RegExReplace(controlName, "\D")
+
+if(!KeywordsHidden%CategoryCount%)
+{
+    GuiControl, %GUINameMappy%:Hide, ButtonAddDynamicKeyword%CategoryCount%
+    GuiControl, %GUINameMappy%:Hide, ButtonRemoveDynamicKeyword%CategoryCount%
+}
+else if(KeywordsHidden%CategoryCount%)
+{
+    GuiControl, %GUINameMappy%:Show, ButtonAddDynamicKeyword%CategoryCount%
+    GuiControl, %GUINameMappy%:Show, ButtonRemoveDynamicKeyword%CategoryCount%
+}
 tempKey = 0
 Loop % SavedAmountOfKeywords[CategoryCount]
     {
@@ -425,26 +602,24 @@ Loop % SavedAmountOfKeywords[CategoryCount]
         if(!KeywordsHidden%CategoryCount%)
         {
             GuiControl, %GUINameMappy%:Hide, ButtonSavedCategory%CategoryCount%Keyword%tempKey%
-            GuiControl, %GUINameMappy%:Hide, ButtonAddDynamicKeyword%CategoryCount%
         }
         else if(KeywordsHidden%CategoryCount%)
         {
             GuiControl, %GUINameMappy%:Show, ButtonSavedCategory%CategoryCount%Keyword%tempKey%
-            GuiControl, %GUINameMappy%:Show, ButtonAddDynamicKeyword%CategoryCount%
         }
-        
     }
 KeywordsHidden%CategoryCount% := !KeywordsHidden%CategoryCount%
 Gui, %GUINameMappy%:Show, AutoSize
 Return
 
 ConfigGuiClose:
+FileDelete, Shadow%ConfigFileName%
 Reload
 Return
 
 SaveToggleOverlayHotkey:
 Gui, Submit, NoHide
-IniWrite, %guihotkeyToggleOverlay% , %ConfigFile%, ToggleOverlayHotkey, Key1
+IniWrite, %guihotkeyToggleOverlay% , %SettingsFile%, Settings, ToggleKey
 Hotkey, %ToggleOverlayHotkey%, ToggleOverlay, Off
 ToggleOverlayHotkey = %guihotkeyToggleOverlay%
 Hotkey, %ToggleOverlayHotkey%, ToggleOverlay, On
@@ -467,6 +642,14 @@ Gui, %GUINameAddKeyword%:Add, Button, x+5 vButtonAddNewKeyword gAddDynamicKeywor
 Gui, %GUINameAddKeyword%:Show
 Return
 
+AddDynamicCategoryConfig:
+Gui, %GUINameAddCategory%: new, +AlwaysOnTop, Add Category
+Gui, %GUINameAddCategory%:Add, Text, x10 y10, New Category:
+Gui, %GUINameAddCategory%:Add, Edit, w150 h20 vEditNewCategory
+Gui, %GUINameAddCategory%:Add, Button, x+5 vButtonAddNewCategory gAddDynamicCategory, Add new category
+Gui, %GUINameAddCategory%:Show
+Return
+
 AddDynamicKeyword:
 Gui, Submit, NoHide
 
@@ -485,7 +668,7 @@ KeyValue = % Keywords%CategoryCount%
 if(!SavedMapsAddedCategory%CategoryCount%){
     tempKey = % Keywords%CategoryCount%
     GuiControlGet, CategoryButton, %GUINameMappy%:Pos, ButtonCategory%CategoryCount%
-    NextButtonX := NewButtonPositionX(CategoryButtonX, CategoryButtonW, 5)
+    NextButtonX := NewButtonPosition(CategoryButtonX, CategoryButtonW, 5)
     NextButtonY = %CategoryButtonY%
     SavedMapsAddedCategory%CategoryCount% := !SavedMapsAddedCategory%CategoryCount%
 }
@@ -493,29 +676,26 @@ else{
     Keywords%CategoryCount% -= 1
     tempKey = % Keywords%CategoryCount%
     GuiControlGet, Button2, %GUINameMappy%:Pos, ButtonSavedCategory%CategoryCount%Keyword%tempKey%
-    NextButtonX := NewButtonPositionX(Button2X, Button2W, 5)
+    NextButtonX := NewButtonPosition(Button2X, Button2W, 5)
     NextButtonY = %Button2Y%
     Keywords%CategoryCount% += 1
     tempKey = % Keywords%CategoryCount%
 }
 
 GuiControlGet, NewKeyword,, %EditNewKeyword%
+Keywords[CategoryCount, Keywords%CategoryCount%] := NewKeyword
 IniWrite, %NewKeyword%, %ConfigFile%, Category%CategoryCount%, Key%KeyValue%
 IniWrite, %KeyValue%, %ConfigFile%, AmountOfKeywordsCategory%CategoryCount%, Key1
 Gui, %GUINameMappy%:Add, Button, x%NextButtonX% y%NextButtonY% vButtonSavedCategory%CategoryCount%Keyword%tempKey% gSearchKeyword, %NewKeyword%
 GuiControlGet, Button3, %GUINameMappy%:Pos, ButtonSavedCategory%CategoryCount%Keyword%tempKey%
-NextButtonX := NewButtonPositionX(Button3X, Button3W, 5)
+NextButtonX := NewButtonPosition(Button3X, Button3W, 5)
 NextButtonY = %Button3Y%
 GuiControl, %GUINameMappy%:Move, ButtonAddDynamicKeyword%CategoryCount%, x%NextButtonX% y%NextButtonY% w20 h%Button3H%
+GuiControlGet, Button3, %GUINameMappy%:Pos, ButtonAddDynamicKeyword%CategoryCount%
+NextButtonX := NewButtonPosition(Button3X, Button3W, 5)
+NextButtonY = %Button3Y%
+GuiControl, %GUINameMappy%:Move, ButtonRemoveDynamicKeyword%CategoryCount%, x%NextButtonX% y%NextButtonY% w20 h%Button3H%
 Gui, %GUINameMappy%:Show, AutoSize
-Return
-
-AddDynamicCategoryConfig:
-Gui, %GUINameAddCategory%: new, +AlwaysOnTop, Add Category
-Gui, %GUINameAddCategory%:Add, Text, x10 y10, New Category:
-Gui, %GUINameAddCategory%:Add, Edit, w150 h20 vEditNewCategory
-Gui, %GUINameAddCategory%:Add, Button, x+5 vButtonAddNewCategory gAddDynamicCategory, Add new category
-Gui, %GUINameAddCategory%:Show
 Return
 
 AddDynamicCategory:
@@ -525,17 +705,27 @@ CategoryCount += 1
 GuiControlGet, NewCategory,, %EditNewCategory%
 Gui, %GUINameMappy%:Add, Button, x10 vButtonCategory%CategoryCount% gGetButtonCategoryPressed, %NewCategory%
 Gui, %GUINameMappy%:Add, Button, x+5 vButtonAddDynamicKeyword%CategoryCount% gGetButtonAddKeywordPressed, +
+Gui, %GUINameMappy%:Add, Button, x+5 vButtonRemoveDynamicKeyword%CategoryCount% gGetButtonRemoveKeywordPressed, -
 if(SavedAmountOfCategories = 0)
 {
+    GuiControl, %GUINameMappy%:Show, ButtonRemoveDynamicCategory
     GuiControlGet, FirstAddButton, %GUINameMappy%:Pos, ButtonAddDynamicCategoryConfig
     GuiControl, %GUINameMappy%:Move, ButtonCategory%CategoryCount%, x%FirstAddButtonX% y%FirstAddButtonY%
-    NextButtonY := NewButtonPositionX(FirstAddButtonY, FirstAddButtonH, 5)
+    NextButtonY := NewButtonPosition(FirstAddButtonY, FirstAddButtonH, 5)
     GuiControl, %GUINameMappy%:Move, ButtonAddDynamicCategoryConfig, x%FirstAddButtonX% y%NextButtonY%
+    GuiControlGet, FirstAddButtonAfter, %GUINameMappy%:Pos, ButtonAddDynamicCategoryConfig
+    NextButtonX := NewButtonPosition(FirstAddButtonAfterX, FirstAddButtonAfterW, 5)
+    GuiControl, %GUINameMappy%:Move, ButtonRemoveDynamicCategory, x%NextButtonX% y%NextButtonY%
     GuiControlGet, FirstCategoryButton, %GUINameMappy%:Pos, ButtonCategory%CategoryCount%
-    NextButtonX := NewButtonPositionX(FirstCategoryButtonX, FirstCategoryButtonW, 5)
+    NextButtonX := NewButtonPosition(FirstCategoryButtonX, FirstCategoryButtonW, 5)
     NextButtonY = %FirstAddButtonY%
     GuiControl, %GUINameMappy%:Move, ButtonAddDynamicKeyword%CategoryCount%, x%NextButtonX% y%NextButtonY%
+    GuiControlGet, AddButton, %GUINameMappy%:Pos, ButtonAddDynamicKeyword%CategoryCount%
+    NextButtonX := NewButtonPosition(AddButtonX, AddButtonW, 5)
+    NextButtonY = %AddButtonY%
+    GuiControl, %GUINameMappy%:Move, ButtonRemoveDynamicKeyword%CategoryCount%, x%NextButtonX% y%NextButtonY%
     Gui, %GUINameMappy%:Show, AutoSize
+
 }
 else
 {
@@ -543,20 +733,48 @@ else
     GuiControlGet, CategoryButton, %GUINameMappy%:Pos, ButtonCategory%CategoryCount%
     CategoryCount += 1
     NextButtonX = %CategoryButtonX%
-    NextButtonY := NewButtonPositionX(CategoryButtonY, CategoryButtonH, 5)
+    NextButtonY := NewButtonPosition(CategoryButtonY, CategoryButtonH, 5)
     GuiControl, %GUINameMappy%:Move, ButtonCategory%CategoryCount%, x%NextButtonX% y%NextButtonY% h%CategoryButtonH%
     GuiControlGet, CategoryButtonNew, %GUINameMappy%:Pos, ButtonCategory%CategoryCount%
     NextButtonX = %CategoryButtonNewX%
-    NextButtonY := NewButtonPositionX(CategoryButtonNewY, CategoryButtonNewH, 5)
+    NextButtonY := NewButtonPosition(CategoryButtonNewY, CategoryButtonNewH, 5)
     GuiControl, %GUINameMappy%:Move, ButtonAddDynamicCategoryConfig, x%NextButtonX% y%NextButtonY% h%CategoryButtonH%
-    NextButtonX := NewButtonPositionX(CategoryButtonNewX, CategoryButtonNewW, 5)
+    GuiControlGet, AddAfter, %GUINameMappy%:Pos, ButtonAddDynamicCategoryConfig
+    RemovePosition := NewButtonPosition(AddAfterX, AddAfterW, 5)
+    GuiControl, %GUINameMappy%:Move, ButtonRemoveDynamicCategory, x%RemovePosition% y%NextButtonY% h%CategoryButtonH%
+    NextButtonX := NewButtonPosition(CategoryButtonNewX, CategoryButtonNewW, 5)
     NextButtonY = %CategoryButtonNewY%
     GuiControl, %GUINameMappy%:Move, ButtonAddDynamicKeyword%CategoryCount%, x%NextButtonX% y%NextButtonY%
+    GuiControlGet, AddButton, %GUINameMappy%:Pos, ButtonAddDynamicKeyword%CategoryCount%
+    NextButtonX := NewButtonPosition(AddButtonX, AddButtonW, 5)
+    NextButtonY = %AddButtonY%
+    GuiControl, %GUINameMappy%:Move, ButtonRemoveDynamicKeyword%CategoryCount%, x%NextButtonX% y%NextButtonY%
 }
+Categories[CategoryCount] := NewCategory
 SavedAmountOfCategories += 1
 IniWrite, %SavedAmountOfCategories%, %ConfigFile%, AmountOfCategories, Key1
 IniWrite, %NewCategory%, %ConfigFile%, Categories, Key%CategoryCount%
 Gui, %GUINameMappy%:Show, AutoSize
+Return
+
+RemoveDynamicKeyword:
+CategoryCount := RegExReplace(controlName, "\D")
+KeyToDelete := SavedAmountOfKeywords[CategoryCount]
+If(KeyToDelete = "" || KeyToDelete = 0)
+{
+    Return
+}
+If(KeyToDelete = 1)
+{
+    IniDelete, %ConfigFile%, Category%CategoryCount%
+    IniDelete, %ConfigFile%, AmountOfKeywordsCategory%CategoryCount%
+    Reload
+    Return
+}
+IniDelete, %ConfigFile%, Category%CategoryCount%, Key%KeyToDelete%
+KeyToDelete -= 1
+IniWrite, %KeyToDelete%, %ConfigFile%, AmountOfKeywordsCategory%CategoryCount%, Key1
+Reload
 Return
 
 GetButtonPressed(CtrlHwnd:=0)
@@ -580,6 +798,13 @@ GetButtonAddKeywordPressed(CtrlHwnd:=0)
     gosub AddDynamicKeywordConfig
 }
 
+GetButtonRemoveKeywordPressed(CtrlHwnd:=0)
+{
+    global controlName
+    GuiControlGet, controlName, Name, %CtrlHwnd%
+    gosub RemoveDynamicKeyword
+}
+
 ; Searches for words (needle) in an array (haystack) (OC: jNizM -> https://www.autohotkey.com/boards/viewtopic.php?f=6&t=3514&p=109617#p109617)
 HasVal(haystack, needle) {
 	if !(IsObject(haystack)) || (haystack.Length() = 0)
@@ -590,10 +815,19 @@ HasVal(haystack, needle) {
 	return 0
 }
 
-NewButtonPositionX(x,y,z)
+NewButtonPosition(x,y,z)
 {
     return x + y + z
 }
+
+SaveWindowPosition:
+if(GUIMappyOpen)
+{
+    WinGetPos, MappyWindowX, MappyWindowY,,, %GUINameMappy% - Version %CurrentVersion% - %ConfigFileName%
+    IniWrite, %MappyWindowX%, %SettingsFile%, Settings, MappyPositionX
+    IniWrite, %MappyWindowY%, %SettingsFile%, Settings, MappyPositionY
+}
+ExitApp
 
 ; I love every single one of you beautiful people. You are amazing. Have a great 2020. 
 ; If life seems rough at some point, just keep this in mind. No matter what other people say or do. You are awesome.
