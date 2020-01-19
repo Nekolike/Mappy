@@ -3,6 +3,9 @@ SendMode Input
 SetWorkingDir %A_ScriptDir%
 #SingleInstance force
 
+if not A_IsAdmin
+    Run *RunAs "%A_ScriptFullPath%"
+
 ; If you need some kind words, scroll to the bottom. 
 
 OnExit, SaveWindowPosition
@@ -73,6 +76,11 @@ ifnotexist,%SettingsFile%
     IniWrite, 500, %SettingsFile%, Settings, MappyPositionY
 }
 IniRead, ConfigFile, %SettingsFile%, Settings, ConfigPath
+if(ConfigFile = "ERROR" | ConfigFile = "")
+{
+    IniWrite, %A_ScriptDir%\Config.ini, %SettingsFile%, Settings, ConfigPath
+    IniRead, ConfigFile, %SettingsFile%, Settings, ConfigPath
+}
 SplitPath, ConfigFile, ConfigFileName
 
 IniRead, ToggleOverlayHotkey, %SettingsFile%, Settings, ToggleKey
@@ -619,6 +627,10 @@ Return
 
 SaveToggleOverlayHotkey:
 Gui, Submit, NoHide
+if(guihotkeyToggleOverlay = "" || guihotkeyToggleOverlay = "ERROR"){
+    MsgBox, Hotkey not recognized, please choose another one
+    Return
+}
 IniWrite, %guihotkeyToggleOverlay% , %SettingsFile%, Settings, ToggleKey
 Hotkey, %ToggleOverlayHotkey%, ToggleOverlay, Off
 ToggleOverlayHotkey = %guihotkeyToggleOverlay%
