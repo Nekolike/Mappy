@@ -1,9 +1,11 @@
-Update 19.01.2020 - Version 1.01
+Update 19.01.2020 - Version 1.01 + 1.02
 
 Bugfix: 
 
 - Added the need to execute the script as an Admin because files might not get created otherwise
 - Fixed a bug where choosing no hotkey while changing the hotkey would result in a non-crash error message
+- Fixed a bug where quotation marks weren't loaded correctly
+- Fixed a bug where the position of Mappy was reset after downloading an update
 
 Update 18.01.2020 - Version 1.0
 

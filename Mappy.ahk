@@ -15,7 +15,7 @@ UpdatesFile := "Updates.txt"
 ChangelogFile := "Changelog.txt"
 SettingsFile := "Settings.ini"
 VersionStart := 19
-CurrentVersion = 1.01
+CurrentVersion = 1.02
 VersionLength = 4
 
 UrlDownloadToFile, https://raw.githubusercontent.com/Nekolike/Mappy/master/%CurrentVersionFile%, %A_ScriptDir%\%CurrentVersionFile%
@@ -32,6 +32,7 @@ if(CurrentVersion < NewVersion){
         MsgBox, 4096, Patch notes, %UpdatesContent%
         UrlDownloadToFile, https://raw.githubusercontent.com/Nekolike/Mappy/master/%MappyFile%, %A_ScriptDir%\%MappyFile%
         UrlDownloadToFile, https://raw.githubusercontent.com/Nekolike/Mappy/master/%ChangelogFile%, %A_ScriptDir%\%ChangelogFile%
+        GUIMappyOpen := false
         Reload
     }     
 }
@@ -165,7 +166,7 @@ if(SavedAmountOfCategories != 0){
             Gui, %GUINameMappy%:Add, Button, x%NextButtonX% y%NextButtonY% vButtonSavedCategory%CategoryCount%Keyword%tempKey% gSearchKeyword, %currentKeyword%
         }
         Gui, %GUINameMappy%:Add, Button, x+5 vButtonAddDynamicKeyword%CategoryCount% gGetButtonAddKeywordPressed, +
-        Gui, %GUINameMappy%:Add, Button, x+5 vButtonRemoveDynamicKeyword%CategoryCount% gGetButtonRemoveKeywordPressed, - ;ADDEDD
+        Gui, %GUINameMappy%:Add, Button, x+5 vButtonRemoveDynamicKeyword%CategoryCount% gGetButtonRemoveKeywordPressed, -
     }
 }
 
@@ -245,7 +246,7 @@ if(AmountOfNumbers = 1)
             Loop % SavedAmountOfKeywords[A_Index]
             {
                 currentKeyword := Keywords[currentRun, KeywordIndex]
-                IniWrite, %currentKeyword% , %A_ScriptDir%\Shadow%ConfigFileName%, Category%currentRun%, Key%KeywordIndex%
+                IniWrite, "%currentKeyword%" , %A_ScriptDir%\Shadow%ConfigFileName%, Category%currentRun%, Key%KeywordIndex%
                 KeywordIndex += 1
             }
             currentRun += 1
@@ -276,7 +277,7 @@ if(AmountOfNumbers = 2)
         Loop % SavedAmountOfKeywords[A_Index]
         {
             currentKeyword := Keywords[currentRun, KeywordIndex]
-            IniWrite, %currentKeyword% , %A_ScriptDir%\Shadow%ConfigFileName%, Category%currentRun%, Key%KeywordIndex%
+            IniWrite, "%currentKeyword%" , %A_ScriptDir%\Shadow%ConfigFileName%, Category%currentRun%, Key%KeywordIndex%
             KeywordIndex += 1
         }
         currentRun += 1
@@ -459,7 +460,7 @@ if(AmountOfCategories <= SavedAmountOfCategories)
         GuiControl, Show, Combo%CategoryCount%
         GuiControl, Show, ButtonAddKeyword%MapCount%
         GuiControlGet, CategoryNumber,, Category%CategoryCount%
-        IniWrite, %CategoryNumber%, %A_ScriptDir%\Shadow%ConfigFileName%, Categories, Key%CategoryCount% ;CHANGED
+        IniWrite, %CategoryNumber%, %A_ScriptDir%\Shadow%ConfigFileName%, Categories, Key%CategoryCount%
         GuiControl, %GUINameMappy%:Text, ButtonCategory%CategoryCount%, % CategoryNumber
     }
 
@@ -469,7 +470,7 @@ if(AmountOfCategories <= SavedAmountOfCategories)
             {
                 CategoryCount += 1
                 GuiControl, %GUINameMappy%:Hide, ButtonCategory%CategoryCount%, % CategoryNumber
-                IniDelete, %A_ScriptDir%\Shadow%ConfigFileName%, Categories, Key%CategoryCount% ;CHANGED
+                IniDelete, %A_ScriptDir%\Shadow%ConfigFileName%, Categories, Key%CategoryCount%
             }
     }
     
@@ -484,7 +485,7 @@ else if(AmountOfCategories > SavedAmountOfCategories)
         GuiControl, Show, Combo%CategoryCount%
         GuiControl, Show, ButtonAddKeyword%MapCount%
         GuiControlGet, CategoryNumber,, Category%CategoryCount%
-        IniWrite, %CategoryNumber%, %A_ScriptDir%\Shadow%ConfigFileName%, Categories, Key%CategoryCount% ;CHANGED
+        IniWrite, %CategoryNumber%, %A_ScriptDir%\Shadow%ConfigFileName%, Categories, Key%CategoryCount%
         GuiControl, %GUINameMappy%:Text, ButtonCategory%CategoryCount%, % CategoryNumber
     }
 
@@ -497,7 +498,7 @@ else if(AmountOfCategories > SavedAmountOfCategories)
         GuiControlGet, CategoryNumber,, Category%CategoryCount%
         Categories[CategoryCount] := CategoryNumber
         Gui, %GUINameMappy%:Add, Button, x10 section vButtonCategory%CategoryCount% gGetButtonCategoryPressed, % Categories[CategoryCount]
-        IniWrite, %CategoryNumber%, %A_ScriptDir%\Shadow%ConfigFileName%, Categories, Key%CategoryCount% ;CHANGED
+        IniWrite, %CategoryNumber%, %A_ScriptDir%\Shadow%ConfigFileName%, Categories, Key%CategoryCount%
     }
 }
 
@@ -507,8 +508,8 @@ Loop % SavedAmountOfCategories
 {
     CategoryCount += 1
     tempKey = 0
-    IniDelete, %A_ScriptDir%\Shadow%ConfigFileName%, Category%CategoryCount% ;CHANGED
-    IniDelete, %A_ScriptDir%\Shadow%ConfigFileName%, AmountOfKeywordsCategory%CategoryCount% ;CHANGED
+    IniDelete, %A_ScriptDir%\Shadow%ConfigFileName%, Category%CategoryCount%
+    IniDelete, %A_ScriptDir%\Shadow%ConfigFileName%, AmountOfKeywordsCategory%CategoryCount%
     GuiControl, %GUINameMappy%:Hide, ButtonAddDynamicKeyword%CategoryCount%
     GuiControl, %GUINameMappy%:Hide, ButtonRemoveDynamicKeyword%CategoryCount%
     Loop % SavedAmountOfKeywords[A_Index]
@@ -525,13 +526,13 @@ Loop %AmountOfCategories%{
     GuiControl, Disable, Category%CategoryCount%
 }
 
-IniWrite, %AmountOfCategories%, %A_ScriptDir%\Shadow%ConfigFileName%, AmountOfCategories, Key1 ;CHANGED
+IniWrite, %AmountOfCategories%, %A_ScriptDir%\Shadow%ConfigFileName%, AmountOfCategories, Key1
 GuiControl, Disable, ButtonAddCategory
 GuiControl, Disable, ButtonSaveCategories
 GuiControl, %GUINameMappy%:Hide, ButtonAddDynamicCategoryConfig
 GuiControl, %GUINameMappy%:Hide, ButtonRemoveDynamicCategory
 Gui, %GUINameConfig%:Add, Button, x10 vButtonSaveKeywords gSaveKeywords, Save Overlay
-Gui, %GUINameConfig%:Add, Button, x+5 vButtonSaveNewKeywords gSaveNewKeywords, Save As New Overlay ;ADDEDD
+Gui, %GUINameConfig%:Add, Button, x+5 vButtonSaveNewKeywords gSaveNewKeywords, Save As New Overlay
 Gui, %GUINameConfig%:Show, AutoSize
 Gui, %GUINameMappy%:Show, AutoSize NoActivate
 Return
@@ -575,8 +576,8 @@ else{
 }
 
 GuiControlGet, ComboValue,, % Combo%CategoryCount%
-IniWrite, %ComboValue%, %A_ScriptDir%\Shadow%ConfigFileName%, Category%CategoryCount%, Key%KeyValue% ;CHANGED
-IniWrite, %KeyValue%, %A_ScriptDir%\Shadow%ConfigFileName%, AmountOfKeywordsCategory%CategoryCount%, Key1 ;CHANGED
+IniWrite, "%ComboValue%", %A_ScriptDir%\Shadow%ConfigFileName%, Category%CategoryCount%, Key%KeyValue% 
+IniWrite, %KeyValue%, %A_ScriptDir%\Shadow%ConfigFileName%, AmountOfKeywordsCategory%CategoryCount%, Key1 
 Gui, %GUINameMappy%:Add, Button, x%NextButtonX% y%NextButtonY% vButtonCategory%CategoryCount%Keyword%tempKey% gSearchKeyword, % Combo%CategoryCount%
 Gui, %GUINameMappy%:Show, AutoSize NoActivate
 Return
@@ -696,7 +697,7 @@ else{
 
 GuiControlGet, NewKeyword,, %EditNewKeyword%
 Keywords[CategoryCount, Keywords%CategoryCount%] := NewKeyword
-IniWrite, %NewKeyword%, %ConfigFile%, Category%CategoryCount%, Key%KeyValue%
+IniWrite, "%NewKeyword%", %ConfigFile%, Category%CategoryCount%, Key%KeyValue%
 IniWrite, %KeyValue%, %ConfigFile%, AmountOfKeywordsCategory%CategoryCount%, Key1
 Gui, %GUINameMappy%:Add, Button, x%NextButtonX% y%NextButtonY% vButtonSavedCategory%CategoryCount%Keyword%tempKey% gSearchKeyword, %NewKeyword%
 GuiControlGet, Button3, %GUINameMappy%:Pos, ButtonSavedCategory%CategoryCount%Keyword%tempKey%
