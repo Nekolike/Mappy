@@ -8,15 +8,15 @@ Mappy is an ahk (autohotkey) script to ease your inventory searches. It allows y
 
 # Video showcase
 
-I recorded a showcase/tutorial to guide through the tool. The version of Mappy in this video is <1.0, so it's missing some features. A new video will be uploaded in the next days. You can check the video out here: [Youtube - Mappy](https://www.youtube.com/watch?v=JkStW1uJr7A)
+I recorded a showcase/tutorial to guide through the tool. You can check the video out here: [Youtube - Mappy](https://www.youtube.com/watch?v=d_Me_jUMZgk)
 
 # Updates
 
 Check the Changelog.txt for a full list of updates. This place only contains informations about the current progress I'd like to share
 
-**Update 20.01.2020**
+**Update 19.01.2020**
 
-Version 1.0 is out. Removing is here, saving & loading is here. I am happy with the result and hope people can find use in the tool. Hope everyone is having a wonderful weekend :)
+Version 1.0 is out. Removing is here, saving & loading is here. I am happy with the result and hope people can find use in the tool. I also recorded and uploaded a new version to show Mappy in its 1.0 state. Hope everyone is having a wonderful weekend :)
 
 
 # What can Mappy do?
