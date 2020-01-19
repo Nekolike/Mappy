@@ -75,6 +75,7 @@ ifnotexist,%SettingsFile%
     IniWrite, ^Numpad0, %SettingsFile%, Settings, ToggleKey
     IniWrite, 500, %SettingsFile%, Settings, MappyPositionX
     IniWrite, 500, %SettingsFile%, Settings, MappyPositionY
+	IniWrite, 150, %SettingsFile%, Settings, Transparency 
 }
 IniRead, ConfigFile, %SettingsFile%, Settings, ConfigPath
 if(ConfigFile = "ERROR" | ConfigFile = "")
@@ -94,6 +95,15 @@ else{
 }
 
 Hotkey, %ToggleOverlayHotkey%, ToggleOverlay, On
+
+IniRead, Transparency, %SettingsFile%, Settings, Transparency
+if(Transparency = "ERROR" || Transparency = ""){
+    IniWrite, 150, %SettingsFile%, Settings, Transparency
+    IniRead, Transparency, %SettingsFile%, Settings, Transparency
+}
+else{
+    IniRead, Transparency, %SettingsFile%, Settings, Transparency
+}
 
 IniRead, SavedAmountOfCategories, %ConfigFile%, AmountOfCategories, Key1
 
@@ -122,7 +132,7 @@ Loop % SavedAmountOfCategories
 
 Gui, %GUINameMappy%:New, +LastFound -SysMenu +AlwaysOnTop, %GUINameMappy% - Version %CurrentVersion% - %ConfigFileName%
 Gui, %GUINameMappy%:Color, %CustomColor%
-WinSet, TransColor, %CustomColor% 150
+WinSet, TransColor, %CustomColor% %Transparency%
 
 Gui, Add, Button, x10 y10 gLock, Lock Menu
 Gui, Add, Button, x+5 gHideKeywords, Hide Keywords
@@ -130,7 +140,7 @@ Gui, Add, Button, x+5 gShowKeywords, Show Keywords
 Gui, Add, Button, x+5 gToggleRegion, Show Region
 Gui, Add, Button, x+5 vButtonConfig gConfig, New Overlay
 Gui, Add, Button, x+5 vButtonLoadConfig gLoadConfig, Load Overlay
-Gui, Add, Button, x+5 vButtonHotkey gConfigHotkey, Change Toggle-Key
+Gui, Add, Button, x+5 vButtonHotkey gConfigHotkey, Settings
 
 Gui, Add, Button, hidden x10 vRegionButton%tempRegion% gSearchKeyword, Glennach Cairns
 Loop % AmountOfRegions - 1
@@ -404,10 +414,12 @@ Loop % SavedAmountOfCategories
 Return
 
 ConfigHotkey:
-Gui, %GUINameOverlayHotkey%: new, +AlwaysOnTop, Change Hotkey
-Gui, %GUINameOverlayHotkey%:Add, Text, x10 y10, New Overlay-Hotkey:
-Gui, %GUINameOverlayHotkey%:Add, Hotkey, w150 h20 vguihotkeyToggleOverlay , %ToggleOverlayHotkey%
-Gui, %GUINameOverlayHotkey%:Add, Button, x+5 vButtonSaveToggleOverlayHotkey gSaveToggleOverlayHotkey, Save new hotkey
+Gui, %GUINameOverlayHotkey%: new, +AlwaysOnTop, Settings
+Gui, %GUINameOverlayHotkey%:Add, Text, x10 y10, Overlay-Hotkey:
+Gui, %GUINameOverlayHotkey%:Add, Hotkey, x+5 w135 vguihotkeyToggleOverlay , %ToggleOverlayHotkey%
+Gui, %GUINameOverlayHotkey%:Add, Text, x10 y40, Transparency:
+Gui, %GUINameOverlayHotkey%:Add, Slider, x+5 w150 vguihotkeyTransparency Range30-255 TickInterval15, %Transparency%
+Gui, %GUINameOverlayHotkey%:Add, Button, x10 y70 vButtonSaveToggleOverlayHotkey gSaveToggleOverlayHotkey, Save
 Gui, %GUINameOverlayHotkey%:Show
 Return
 
@@ -636,7 +648,9 @@ IniWrite, %guihotkeyToggleOverlay% , %SettingsFile%, Settings, ToggleKey
 Hotkey, %ToggleOverlayHotkey%, ToggleOverlay, Off
 ToggleOverlayHotkey = %guihotkeyToggleOverlay%
 Hotkey, %ToggleOverlayHotkey%, ToggleOverlay, On
+IniWrite, %guihotkeyTransparency% , %SettingsFile%, Settings, Transparency
 Gui, Destroy
+Reload
 Return
     
 ToggleOverlay:
