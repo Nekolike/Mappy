@@ -15,7 +15,7 @@ UpdatesFile := "Updates.txt"
 ChangelogFile := "Changelog.txt"
 SettingsFile := "Settings.ini"
 VersionStart := 19
-CurrentVersion = 1.00
+CurrentVersion = 1.01
 VersionLength = 4
 
 UrlDownloadToFile, https://raw.githubusercontent.com/Nekolike/Mappy/master/%CurrentVersionFile%, %A_ScriptDir%\%CurrentVersionFile%
