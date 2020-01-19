@@ -1,3 +1,10 @@
+Update 19.01.2020 - Version 1.01
+
+Bugfix: 
+
+- Added the need to execute the script as an Admin because files might not get created otherwise
+- Fixed a bug where choosing no hotkey while changing the hotkey would result in a non-crash error message
+
 Update 18.01.2020 - Version 1.0
 
 - You can now remove any category / keyword with a right-click on the category / keyword. There's also a new "-" button at the end of each category which removes the last keyword. There's also a new "-" button at the bottom of your categories which removes the last category (With all the keywords in them). 
