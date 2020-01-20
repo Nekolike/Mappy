@@ -3,8 +3,13 @@ SendMode Input
 SetWorkingDir %A_ScriptDir%
 #SingleInstance force
 
-if not A_IsAdmin
-    Run *RunAs "%A_ScriptFullPath%"
+try {
+    if !A_IsAdmin{
+        Run *RunAs "%A_ScriptFullPath%"
+    }
+} catch e{
+    ExitApp
+}    
 
 ; If you need some kind words, scroll to the bottom. 
 
@@ -605,6 +610,7 @@ if WinExist("Path of Exile"){
     WinActivate, Path of Exile
     Send ^f
     SendRaw % var
+    Send {Enter}
 }
 Return
 
