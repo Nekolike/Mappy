@@ -14,9 +14,9 @@ I recorded a showcase/tutorial to guide through the tool. You can check the vide
 
 Check the Changelog.txt for a full list of updates. This place only contains informations about the current progress I'd like to share
 
-**Update 19.01.2020**
+**Update 20.01.2020**
 
-Version 1.0 is out. Removing is here, saving & loading is here. I am happy with the result and hope people can find use in the tool. I also recorded and uploaded a new version to show Mappy in its 1.0 state. Hope everyone is having a wonderful weekend :)
+The 1.0 release was great, a lot of people commented on it, created issues on github and watched the new video. I got pretty stressed out by some bug reports but could manage most of them. I am very happy to be part of the PoE community and able to give something to them. I also got to work with my first contributor, Kashi! He is a very cool guy with great feedback. He is now contributing things to the tools aswell, so new updates will also contain some of his work! I am not sure where Mappy is going from here, I will add new things and react to feedback but while 1.0 and what I'd like to achieve with it was something I had in mind form the beginning, the rest from here wasn't part of the plan. But I am looking forward to keep working and keep improving the tool!
 
 
 # What can Mappy do?
