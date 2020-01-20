@@ -375,7 +375,7 @@ Gui, %GUINameMappy%:Show, AutoSize
 Return
 
 ToggleRegion:
-if(RegionOpen)
+if(!RegionOpen)
 {
     Loop % AmountOfRegions
     {
