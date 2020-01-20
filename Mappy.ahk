@@ -15,13 +15,14 @@ UpdatesFile := "Updates.txt"
 ChangelogFile := "Changelog.txt"
 SettingsFile := "Settings.ini"
 VersionStart := 19
-CurrentVersion = 1.02
+CurrentVersion = 1.03
 VersionLength = 4
 
 UrlDownloadToFile, https://raw.githubusercontent.com/Nekolike/Mappy/master/%CurrentVersionFile%, %A_ScriptDir%\%CurrentVersionFile%
 FileRead, NewVersion, %A_ScriptDir%\%CurrentVersionFile%
 
 NewVersion := SubStr(NewVersion, VersionStart, VersionLength)
+GUIMappyOpen := false
 
 if(CurrentVersion < NewVersion){
     MsgBox, 4, Update available, New version available! Want to update now?
@@ -32,7 +33,6 @@ if(CurrentVersion < NewVersion){
         MsgBox, 4096, Patch notes, %UpdatesContent%
         UrlDownloadToFile, https://raw.githubusercontent.com/Nekolike/Mappy/master/%MappyFile%, %A_ScriptDir%\%MappyFile%
         UrlDownloadToFile, https://raw.githubusercontent.com/Nekolike/Mappy/master/%ChangelogFile%, %A_ScriptDir%\%ChangelogFile%
-        GUIMappyOpen := false
         Reload
     }     
 }
@@ -47,7 +47,6 @@ Maps := ["Acid Caverns", "Alleyways", "Ancient City", "Arachnid Nest", "Arcade",
 Regions := ["Glennach Cairns", "Haewark Hamlet", "Lex Ejoris", "Lex Proxima", "Lira Arthain", "New Vastir", "Tirn's End", "Valdo's Rest"]
 RegionButtons := ["RegionButton1", "RegionButton2", "RegionButton3", "RegionButton4", "RegionButton5", "RegionButton6", "RegionButton7", "RegionButton8"]
 IsLocked := false
-GUIMappyOpen := true
 GUIConfigOpen := false
 RegionOpen := false
 CategoryCount = 0
@@ -212,6 +211,7 @@ else
     GuiControl, Text, Lock, Unlock
 }
 Gui, %GUINameMappy%:Show, x%MappyWindowX% y%MappyWindowY% NoActivate AutoSize 
+GUIMappyOpen := true
 OnMessage(0x204, "WM_RBUTTONDOWN")
 Return
 
@@ -604,7 +604,7 @@ if WinExist("Path of Exile"){
     GuiControlGet, var,, % A_GuiControl
     WinActivate, Path of Exile
     Send ^f
-    Send % var
+    SendRaw % var
 }
 Return
 
