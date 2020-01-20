@@ -604,7 +604,7 @@ if WinExist("Path of Exile"){
     GuiControlGet, var,, % A_GuiControl
     WinActivate, Path of Exile
     Send ^f
-    Send % var
+    SendRaw % var
 }
 Return
 
