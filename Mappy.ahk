@@ -49,6 +49,7 @@ RegionButtons := ["RegionButton1", "RegionButton2", "RegionButton3", "RegionButt
 IsLocked := false
 GUIConfigOpen := false
 RegionOpen := false
+KeywordsShown := true
 CategoryCount = 0
 MapCount = 0
 AmountOfRegions = 8
@@ -134,8 +135,7 @@ Gui, %GUINameMappy%:Color, %CustomColor%
 WinSet, TransColor, %CustomColor% %Transparency%
 
 Gui, Add, Button, x10 y10 gLock, Lock Menu
-Gui, Add, Button, x+5 gHideKeywords, Hide Keywords
-Gui, Add, Button, x+5 gShowKeywords, Show Keywords
+Gui, Add, Button, x+5 gToggleKeywords, Hide Keywords
 Gui, Add, Button, x+5 gToggleRegion, Show Region
 Gui, Add, Button, x+5 vButtonConfig gConfig, New Overlay
 Gui, Add, Button, x+5 vButtonLoadConfig gLoadConfig, Load Overlay
@@ -340,37 +340,43 @@ IsLocked := !IsLocked
 Gui, %GUINameMappy%:Show, AutoSize
 Return
 
-HideKeywords:
+ToggleKeywords:
 CategoryCount = 0
-Loop % SavedAmountOfCategories
+if(KeywordsShown)
 {
-    tempKey = 0
-    CategoryCount += 1
-    Loop % SavedAmountOfKeywords[A_Index]
-    {
-        tempKey += 1
-        GuiControl, %GUINameMappy%:Hide, ButtonSavedCategory%CategoryCount%Keyword%tempKey%   
-    }
-    GuiControl, %GUINameMappy%:Hide, ButtonAddDynamicKeyword%CategoryCount% 
-    GuiControl, %GUINameMappy%:Hide, ButtonRemoveDynamicKeyword%CategoryCount% 
+	Loop % SavedAmountOfCategories
+	{
+		tempKey = 0
+		CategoryCount += 1
+		Loop % SavedAmountOfKeywords[A_Index]
+		{
+			tempKey += 1
+			GuiControl, %GUINameMappy%:Hide, ButtonSavedCategory%CategoryCount%Keyword%tempKey%   
+		}
+		GuiControl, %GUINameMappy%:Hide, ButtonAddDynamicKeyword%CategoryCount% 
+		GuiControl, %GUINameMappy%:Hide, ButtonRemoveDynamicKeyword%CategoryCount% 
+	}
+    GuiControl, Text, Hide Keywords, Show Keywords
 }
-Return
-
-ShowKeywords:
-CategoryCount = 0
-Loop % SavedAmountOfCategories
+else
 {
-    tempKey = 0
-    CategoryCount += 1
-    Loop % SavedAmountOfKeywords[A_Index]
-        {
-            tempKey += 1
-                GuiControl, %GUINameMappy%:Show, ButtonSavedCategory%CategoryCount%Keyword%tempKey%            
-                
-        }
-    GuiControl, %GUINameMappy%:Show, ButtonAddDynamicKeyword%CategoryCount%  
-    GuiControl, %GUINameMappy%:Show, ButtonRemoveDynamicKeyword%CategoryCount%  
+	Loop % SavedAmountOfCategories
+	{
+		tempKey = 0
+		CategoryCount += 1
+		Loop % SavedAmountOfKeywords[A_Index]
+			{
+				tempKey += 1
+					GuiControl, %GUINameMappy%:Show, ButtonSavedCategory%CategoryCount%Keyword%tempKey%            
+					
+			}
+		GuiControl, %GUINameMappy%:Show, ButtonAddDynamicKeyword%CategoryCount%  
+		GuiControl, %GUINameMappy%:Show, ButtonRemoveDynamicKeyword%CategoryCount%  
+	}
+    GuiControl, Text, Show Keywords, Hide Keywords
+	Gui, %GUINameMappy%:Show, AutoSize
 }
+KeywordsShown := !KeywordsShown
 Gui, %GUINameMappy%:Show, AutoSize
 Return
 
