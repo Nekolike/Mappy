@@ -1,6 +1,11 @@
-Update 19.01.2020 - Version 1.01 + 1.02
+Update 20.01.20202 - Version 1.03
 
-Bugfix: 
+- Added a new setting to set the transparency of Mappy
+- Renamed the "Change Toggle-Key" to "Settings"
+- Fixed a bug where combinatations of characters weren't sent correctly
+- Fixed a bug where the position of Mappy was reset after downloading an update (Again)
+
+Update 19.01.2020 - Version 1.01 + 1.02
 
 - Added the need to execute the script as an Admin because files might not get created otherwise
 - Fixed a bug where choosing no hotkey while changing the hotkey would result in a non-crash error message

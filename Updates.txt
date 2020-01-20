@@ -1,6 +1,7 @@
-Update 19.01.2020 - Version 1.02
+Update 20.01.2020 - Version 1.03
 
+- Added a new setting to set the transparency of Mappy
+- Renamed the "Change Toggle-Key" to "Settings"
 - Fixed a bug where quotation marks weren't loaded correctly
-- Fixed a bug where the position of Mappy was reset after downloading an update
-
-In order to get the bugfix working, please remove your previously created keywords with quotation marks and add them again
+- Fixed a bug where the position of Mappy was reset after downloading an update (Again)
+- Fixed a bug where combinatations of characters weren't sent correctly
