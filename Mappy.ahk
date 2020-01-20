@@ -611,6 +611,7 @@ if WinExist("Path of Exile"){
     WinActivate, Path of Exile
     Send ^f
     SendRaw % var
+    Send {Enter}
 }
 Return
 
