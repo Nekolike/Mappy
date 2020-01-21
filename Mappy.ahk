@@ -195,7 +195,7 @@ else
 }
 IniRead, MappyWindowX, %SettingsFile%, Settings, MappyPositionX
 IniRead, MappyWindowY, %SettingsFile%, Settings, MappyPositionY
-if((MappyWindowX = "" || MappyWindowX = "ERROR") && (MappyWindowY = "" || MappyWindowY = "ERROR"))
+if(((MappyWindowX = "" || MappyWindowX = "ERROR") && (MappyWindowY = "" || MappyWindowY = "ERROR")) || (MappyWindowX < 0 || MappyWindowY < 0))
 {
     IniWrite, 500, %SettingsFile%, Settings, MappyPositionX
     IniWrite, 500, %SettingsFile%, Settings, MappyPositionY
@@ -561,6 +561,11 @@ Return
 
 SaveNewKeywords:
 FileSelectFile, newConfigPath, S16
+If ErrorLevel{ ; "Cancel" button, close, or Escape
+    FileDelete, %A_ScriptDir%\Shadow%ConfigFileName%
+    Reload
+    Return
+}
 FileDelete, %newConfigPath%
 IniWrite, %newConfigPath%, %SettingsFile%, Settings, ConfigPath
 FileMove, %A_ScriptDir%\Shadow%ConfigFileName%, %newConfigPath%, 1
