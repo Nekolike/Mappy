@@ -19,8 +19,9 @@ CurrentVersionFile := "CurrentVersion.txt"
 UpdatesFile := "Updates.txt"
 ChangelogFile := "Changelog.txt"
 SettingsFile := "Settings.ini"
+ExampleFile := "Example.ini"
 VersionStart := 19
-CurrentVersion = 1.03
+CurrentVersion = 1.04
 VersionLength = 4
 
 UrlDownloadToFile, https://raw.githubusercontent.com/Nekolike/Mappy/master/%CurrentVersionFile%, %A_ScriptDir%\%CurrentVersionFile%
@@ -134,6 +135,16 @@ Loop % SavedAmountOfCategories
     }
 }
 
+IniRead, ExampleWasAdded, %SettingsFile%, Settings, ExampleWasAdded
+ifnotexist, %ExampleFile%
+{
+    if(ExampleWasAdded = "" || ExampleWasAdded = "ERROR")
+    {
+        UrlDownloadToFile, https://raw.githubusercontent.com/Nekolike/Mappy/master/%ExampleFile%, %A_ScriptDir%\%ExampleFile%
+        IniWrite, true, %SettingsFile%, Settings, ExampleWasAdded
+    }
+}
+
 Gui, %GUINameMappy%:New, +LastFound -SysMenu +AlwaysOnTop, %GUINameMappy% - Version %CurrentVersion% - %ConfigFileName%
 Gui, %GUINameMappy%:Color, %CustomColor%
 WinSet, TransColor, %CustomColor% %Transparency%
@@ -159,7 +170,7 @@ if(SavedAmountOfCategories != 0){
         CategoryCount += 1
         tempKey = 0
         GuiControlGet, Category%CategoryCount%
-        Gui, %GUINameMappy%:Add, Button, x10 section vButtonCategory%CategoryCount% gGetButtonCategoryPressed, % Categories[CategoryCount]
+        Gui, Add, Button, x10 vButtonCategory%CategoryCount% gGetButtonCategoryPressed, % Categories[CategoryCount]
         Loop % SavedAmountOfKeywords[A_Index]{
             if(!SavedMapsAddedCategory%CategoryCount%){
                 GuiControlGet, CategoryButton, %GUINameMappy%:Pos, ButtonCategory%CategoryCount%
@@ -215,7 +226,7 @@ else
     Gui, %GUINameMappy%:-Caption
     GuiControl, Text, Lock, Unlock
 }
-Gui, %GUINameMappy%:Show, x%MappyWindowX% y%MappyWindowY% NoActivate AutoSize 
+Gui, %GUINameMappy%:Show, x%MappyWindowX% y%MappyWindowY% AutoSize 
 GUIMappyOpen := true
 OnMessage(0x204, "WM_RBUTTONDOWN")
 Return
@@ -386,7 +397,7 @@ if(!RegionOpen)
     {
         GuiControl, Show, % Regions[A_Index]
     }
-    GuiControl, Text, Show Region, Hide Region
+    GuiControl, Text, Show Region, Hide Region  
 }
 else
 {
@@ -394,7 +405,7 @@ else
     {
         GuiControl, Hide, % Regions[A_Index]
     }
-    GuiControl, Text, Hide Region, Show Region
+    GuiControl, Text, Hide Region, Show Region   
 }
 RegionOpen := !RegionOpen
 Gui, %GUINameMappy%:Show, AutoSize
