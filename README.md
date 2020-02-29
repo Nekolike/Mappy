@@ -1,6 +1,6 @@
 # Mappy
 
-Download here: [Mappy](https://github.com/Nekolike/Mappy/releases/tag/v1.0)
+Download here: [Mappy](https://github.com/Nekolike/Mappy/releases/tag/v1.04)
 
 Mappy is an ahk (autohotkey) script to ease your inventory searches. It allows you to save all the things you search for in your stash or at vendors every day. It simply replaces typing with clicking on buttons.
 
@@ -14,9 +14,9 @@ I recorded a showcase/tutorial to guide through the tool. You can check the vide
 
 Check the Changelog.txt for a full list of updates. This place only contains informations about the current progress I'd like to share
 
-**Update 20.01.2020**
+**Update 01.03.2020**
 
-The 1.0 release was great, a lot of people commented on it, created issues on github and watched the new video. I got pretty stressed out by some bug reports but could manage most of them. I am very happy to be part of the PoE community and able to give something to them. I also got to work with my first contributor, Kashi! He is a very cool guy with great feedback. He is now contributing things to the tools aswell, so new updates will also contain some of his work! I am not sure where Mappy is going from here, I will add new things and react to feedback but while 1.0 and what I'd like to achieve with it was something I had in mind form the beginning, the rest from here wasn't part of the plan. But I am looking forward to keep working and keep improving the tool!
+Hey everyone! This is the first update from me since january and I currently don't know how to feel about it. Good I guess. While I absolutely loved the time with the project and the community, it also gave me a lot of anxiety. I had to deal with actual peoples feedback instead of my own silly thoughts. I didn't experience anything like that before apart from my fellow students at college and the teachers, but you kinda know them so it's fairly different. Trying to make everyone happy and updating the tool as much as possible via feature requests was too much for me, so I just quit. It didn't help that I was going through a rough time at college. While working on Mappy, I was applying for jobs with a fair amount of rejection. But I am now in a better position, I got a job as a developer and got other things in order aswell. While I can't work as much on Mappy as I used to due to my new job, I want to get back on it so it doesn't get lost. The release of the new league helps me with the motivation aswell, I am really excited for the 13th of March! :) Thats all I have to share for now, I don't know when the next update goes live but I wanted you to know that I haven't given up on Mappy. I love you all.
 
 
 # What can Mappy do?
