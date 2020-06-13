@@ -43,6 +43,12 @@ if(CurrentVersion < NewVersion){
     }     
 }
 
+ifnotexist,%A_ScriptDir%\images\mappy_logo.png
+{
+    UrlDownloadToFile, https://raw.githubusercontent.com/Nekolike/Mappy/master/images/mappy_logo.png, %A_ScriptDir%\images\mappy_logo.png
+    Reload
+}
+
 Menu, Tray, Icon, %A_ScriptDir%\images\mappy_logo.png, 1
 
 CustomColor := "EEAA99"
@@ -69,12 +75,6 @@ controlName := ""
 KeywordArrayIndex = 0
 KeywordIndex = 0
 tempRegion := 1
-
-ifnotexist,%A_ScriptDir%\images\mappy_logo.png
-{
-    UrlDownloadToFile, https://raw.githubusercontent.com/Nekolike/Mappy/master/images/mappy_logo.png, %A_ScriptDir%\images\mappy_logo.png
-    Reload
-}
 
 ConfigFile = %A_ScriptDir%\Config.ini
 ifnotexist,%ConfigFile%
