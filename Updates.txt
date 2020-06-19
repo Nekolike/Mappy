@@ -1,8 +1,3 @@
-Update 21.01.2020 - Version 1.04
+Update 19.06.2020 - Version 1.05
 
-- Added an "Example.ini" which can be loaded. Contains keywords I use for my Quadtab as well as some informations on how to use the overlay.
-- Fixed a bug where shadow-save-files would not get deleted when canceling the process of saving an overlay in a new .ini
-- Fixed a bug where the positions of the GUI might become negative, thus disappearing from the screen
-- Fixed a bug where pressing a keyword would disable the Ctrl+Scroll function of PoE Trademacro
-- Fixed a bug where declining permission to the script on start up would result in an error message
-- Fixed a bug where the first button press on "Show Region" would not work
+- Added a systray icon, so you can distinguish Mappy from all the other AHK-scripts you have running.
