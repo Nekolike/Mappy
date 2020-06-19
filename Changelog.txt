@@ -1,3 +1,7 @@
+Update 19.06.2020 - Version 1.05
+
+- Added a systray icon, so you can distinguish Mappy from all the other AHK-scripts you have running.
+
 Update 21.01.2020 - Version 1.04
 
 - Added an "Example.ini" which can be loaded. Contains keywords I use for my Quadtab as well as some informations on how to use the overlay.
