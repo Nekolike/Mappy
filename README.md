@@ -1,10 +1,10 @@
 # Mappy
 
-Download here: [Mappy](https://github.com/Nekolike/Mappy/releases/tag/v1.04)
+**Download here:** [Mappy](https://github.com/Nekolike/Mappy/releases/tag/v1.04)
 
 Mappy is an ahk (autohotkey) script to ease your inventory searches. It allows you to save all the things you search for in your stash or at vendors every day. It simply replaces typing with clicking on buttons.
 
-![Image of Mappy](images/Mappy.PNG)
+![Image of Mappy](images/mappy_example.PNG)
 
 # Video showcase
 
@@ -14,10 +14,9 @@ I recorded a showcase/tutorial to guide through the tool. You can check the vide
 
 Check the Changelog.txt for a full list of updates. This place only contains informations about the current progress I'd like to share
 
-**Update 01.03.2020**
+**Update 22.09.2020**
 
-Hey everyone! This is the first update from me since january and I currently don't know how to feel about it. Good I guess. While I absolutely loved the time with the project and the community, it also gave me a lot of anxiety. I had to deal with actual peoples feedback instead of my own silly thoughts. I didn't experience anything like that before apart from my fellow students at college and the teachers, but you kinda know them so it's fairly different. Trying to make everyone happy and updating the tool as much as possible via feature requests was too much for me, so I just quit. It didn't help that I was going through a rough time at college. While working on Mappy, I was applying for jobs with a fair amount of rejection. But I am now in a better position, I got a job as a developer and got other things in order aswell. While I can't work as much on Mappy as I used to due to my new job, I want to get back on it so it doesn't get lost. The release of the new league helps me with the motivation aswell, I am really excited for the 13th of March! :) Thats all I have to share for now, I don't know when the next update goes live but I wanted you to know that I haven't given up on Mappy. I love you all.
-
+Hey guys, first message in a long time. I really enjoy the current league and got my spirit for the game back. While the tool is mostly done for my needs, I will look into the issues again and see if there's anything that needs to be fixed or updated. So let me know if there's something major. Also big big big thanks for Kashi for updating the tool while I wasn't able to and being an amazing person to "work" with. Enjoy the league people!
 
 # What can Mappy do?
 
@@ -31,11 +30,6 @@ Mappy can:
 - Show & Hide all 8 region names for you to search in your stash. One click on any region will show all the maps in that region (If you are at your stash with the currently tab containing maps)
 - Save multiple layouts. You can create a new overlay with the "New Overlay" button and save your overlay as a new one at the end via the "Save As New Overlay". The filename needs to end with ".ini"
 - Load any overlay. Click "Load Overlay" and choose a "*.ini" file to load. This works with any .ini that was created via Mappy. Allows for sharing overlays
-
-# What can Mappy not do (yet)?
-This is more a list of things that aren't working / implemented yet. Check out future versions of Mappy to see if any of these were added!
-
-- Adding information to regions like influence or watch stones. Might be coming in the next couple of updates but it's not on my high-priority list
 
 # How to use Mappy (Version 1.0)
 
@@ -57,40 +51,5 @@ Method 2 (Creating a new overlay via the config-gui. Allows for saving the overl
 - Done with your categories & keywords? You can either choose "Save Overlay" to overwrite your current one or choose "Save As New Overlay" to create a new file (filename must end with ".ini")
 
 Loading Overlays
-- You can also load overlays (either from yourself or other people if they share their .ini.
+- You can also load overlays (either from yourself or other people if they share their .ini.)
 - Simply select "Load Overlay" and select the file you'd like to load. Done
-
-
-# How to use Mappy (Outdated < Version 1.0)
-A video on how to use Mappy can be found in the "Demo Video" section above. I have also written down the needed steps to use and set up your Mappy below:
-
-Step 1: Startup Mappy.ahk - You will see the following window (That will be your main management window)
-![Image of Mappy at startup](images/Mappy_Startup.PNG)
-
-Step 2: Click on "Config" to set your environment up - A new window will open which looks like this
-![Image of Config at startup](images/Config_Startup.PNG)
-
-Step 3: Choose the amount of categories you want to use and save it with the "Save amount"-button
-
-(Optional) Step 3.1: Want to add more categories? Click "Add Category" and choose a name
-
-Step 4: Your input fields for categories will open below. Choose any name for the category you want.  (I.e. "Good Maps", "Conqueror Items", "Elder/Shaper Items", "Lategame Bases", Gems for new chars)
-
-![Image of Category amount](images/Config_ChooseCategory.PNG)
-
-Step 5: If you are done, click "Save Categories" to lock them in. (They can't be changed in the current version.) New options will pop up next to your categories and the categories will be put into your "Mappy"-Window
-
-![Image of Category + Keyword options](images/Mappy_CategoriesChosen.PNG)
-
-Step 6: You can either choose any name for your search-criteria you want or choose a map from the drop-down-list. Inputting the Map name yourself will also work. Any word will work but keep it "searchable" for your map stash, otherwise it will be a useless button. After inputting your word click "Add" to add it to the Mappy-Window.
-
-Step 7: Once you are done with your categories and search-words, close the Config-Window or press "Save Keywords" to save your overlay. The "Mappy"-Window will shortly reload.
-
-Step 8: Choose a place for your Mappy-Window and lock it with the "Lock Menu"-button. (You have to lock it in order for your buttons to work!) You can unlock and move it anywhere else if your place of choice doesn't please you. 
-
-Step 9: Your Mappy is set up and you can start using it. Check out the "What can Mappy do" section to find more additional features.
-
-![Image of Mappy done](images/Mappy_Final.PNG)
-
-(Optional) Step 10: Done with searching for items? Hide Mappy with Ctrl+Numpad0 (Or change the hotkey via the "Change Toggle-Key" option!
-
