@@ -89,6 +89,7 @@ ifnotexist,%SettingsFile%
     IniWrite, 500, %SettingsFile%, Settings, MappyPositionX
     IniWrite, 500, %SettingsFile%, Settings, MappyPositionY
     IniWrite, 150, %SettingsFile%, Settings, Transparency
+	IniWrite, %A_ScreenHeight%, %SettingsFile%, Settings, ScreenHeight
 }
 IniRead, ConfigFile, %SettingsFile%, Settings, ConfigPath
 if(ConfigFile = "ERROR" | ConfigFile = "")
@@ -106,7 +107,6 @@ if(ToggleOverlayHotkey = "ERROR" || ToggleOverlayHotkey = ""){
 else{
     IniRead, ToggleOverlayHotkey, %SettingsFile%, Settings, ToggleKey
 }
-
 Hotkey, %ToggleOverlayHotkey%, ToggleOverlay, On
 
 IniRead, Transparency, %SettingsFile%, Settings, Transparency
@@ -118,8 +118,19 @@ else{
     IniRead, Transparency, %SettingsFile%, Settings, Transparency
 }
 
-IniRead, SavedAmountOfCategories, %ConfigFile%, AmountOfCategories, Key1
+IniRead, ScreenHeight, %SettingsFile%, Settings, ScreenHeight
+if(ScreenHeight = "ERROR" || ScreenHeight = ""){
+    IniWrite, %A_ScreenHeight%, %SettingsFile%, Settings, ScreenHeight
+    IniRead, ScreenHeight, %SettingsFile%, Settings, ScreenHeight
+	MsgBox, Screenheight to calculate fontsize has been set to the y-value of your mainscreen resolution :%A_ScreenHeight% by default. If you are not playing PoE on your systems mainscreen, you will be able to set the correct y-value in the Settings.ini under the parameter "ScreenHeight".
+}
+else{
+    IniRead, ScreenHeight, %SettingsFile%, Settings, ScreenHeight
+}
 
+ResolutionFactoredFontSize := Round(ScreenHeight/1080*8)
+
+IniRead, SavedAmountOfCategories, %ConfigFile%, AmountOfCategories, Key1
 if(SavedAmountOfCategories = "ERROR" || SavedAmountOfCategories = ""){
     IniWrite, 0, %ConfigFile%, AmountOfCategories, Key1
     SavedAmountOfCategories = 0
@@ -155,6 +166,7 @@ ifnotexist, %ExampleFile%
 
 Gui, %GUINameMappy%:New, +LastFound -SysMenu +AlwaysOnTop, %GUINameMappy% - Version %CurrentVersion% - %ConfigFileName%
 Gui, %GUINameMappy%:Color, %CustomColor%
+Gui, Font, s%ResolutionFactoredFontSize%
 WinSet, TransColor, %CustomColor% %Transparency%
 
 Gui, Add, Button, x10 y10 gLock, Lock Menu
